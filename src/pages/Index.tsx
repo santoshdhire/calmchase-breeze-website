@@ -6,6 +6,7 @@ import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import InteractiveQuiz from '../components/InteractiveQuiz';
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <Navigation />
       <Hero />
       <Features />
+      <InteractiveQuiz />
       <Testimonials />
       <CTA />
       <Footer />

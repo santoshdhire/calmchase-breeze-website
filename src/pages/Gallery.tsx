@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
 
 const Gallery = () => {
-  // Sample gallery categories and images
   const categories = [
     "All",
     "SSB Programs",
@@ -13,54 +13,63 @@ const Gallery = () => {
     "Adventure Club"
   ];
   
-  const [activeCategory, setActiveCategory] = React.useState("All");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   
-  // This would typically come from your content management system
   const galleryItems = [
     {
       category: "SSB Programs",
       title: "Group Task Activity",
-      description: "Candidates working together to solve complex problems during SSB preparation."
+      description: "Candidates working together to solve complex problems during SSB preparation.",
+      color: "from-blue-500 to-indigo-600"
     },
     {
       category: "Digital Detox",
       title: "Meditation Session",
-      description: "Participants practicing mindfulness during the 21-day digital detox program."
+      description: "Participants practicing mindfulness during the 21-day digital detox program.",
+      color: "from-purple-500 to-pink-600"
     },
     {
       category: "Personality Development",
       title: "Public Speaking Workshop",
-      description: "Students developing communication skills through public speaking exercises."
+      description: "Students developing communication skills through public speaking exercises.",
+      color: "from-green-500 to-emerald-600"
     },
     {
       category: "Adventure Club",
       title: "Mountain Trekking",
-      description: "Adventure club members building resilience through challenging treks."
+      description: "Adventure club members building resilience through challenging treks.",
+      color: "from-orange-500 to-red-600"
     },
     {
       category: "SSB Programs",
       title: "Interview Preparation",
-      description: "Mock interview sessions to prepare candidates for SSB interviews."
+      description: "Mock interview sessions to prepare candidates for SSB interviews.",
+      color: "from-blue-600 to-cyan-500"
     },
     {
       category: "Digital Detox",
       title: "Nature Connect",
-      description: "Digital detox participants reconnecting with nature through outdoor activities."
+      description: "Digital detox participants reconnecting with nature through outdoor activities.",
+      color: "from-pink-500 to-purple-600"
     },
     {
       category: "Personality Development",
       title: "Team Building",
-      description: "Interactive team building exercises to develop leadership skills."
+      description: "Interactive team building exercises to develop leadership skills.",
+      color: "from-teal-500 to-green-600"
     },
     {
       category: "Adventure Club",
       title: "Rock Climbing",
-      description: "Building confidence through challenging physical activities."
+      description: "Building confidence through challenging physical activities.",
+      color: "from-red-500 to-orange-600"
     },
     {
       category: "SSB Programs",
       title: "Graduation Ceremony",
-      description: "Successful candidates celebrating their selection into defense forces."
+      description: "Successful candidates celebrating their selection into defense forces.",
+      color: "from-indigo-500 to-blue-600"
     }
   ];
   
@@ -68,67 +77,182 @@ const Gallery = () => {
     ? galleryItems 
     : galleryItems.filter(item => item.category === activeCategory);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage !== null) {
+        if (e.key === 'Escape') {
+          setSelectedImage(null);
+        } else if (e.key === 'ArrowRight') {
+          setSelectedImage((prev) => 
+            prev !== null ? Math.min(prev + 1, filteredItems.length - 1) : null
+          );
+        } else if (e.key === 'ArrowLeft') {
+          setSelectedImage((prev) => 
+            prev !== null ? Math.max(prev - 1, 0) : null
+          );
+        }
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, filteredItems.length]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <Navigation />
       
-      <section className="pt-32 pb-16">
+      <section className="pt-36 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+            >
               Our 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Gallery</span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore moments from our programs, events, and success stories.
-            </p>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+            >
+              Explore moments from our transformative programs that change lives.
+            </motion.p>
           </div>
           
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4 mb-16"
+          >
+            {categories.map((category, index) => (
+              <motion.button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === category
-                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md"
-                    : "bg-white/50 backdrop-blur-sm hover:bg-white text-gray-700"
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                    : "bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700"
                 }`}
               >
                 {category}
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
           
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Gallery Grid with Masonry Layout */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+          >
             {filteredItems.map((item, index) => (
-              <div 
+              <motion.div 
                 key={index}
-                className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                onClick={() => setSelectedImage(index)}
+                className="break-inside-avoid cursor-pointer"
               >
-                <div className="h-64 bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                  {/* Placeholder for actual images */}
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                    <span className="text-lg">{item.category}</span>
+                <div className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 h-[350px] sm:h-[${Math.floor(Math.random() * 150) + 250}px]`}>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80`}></div>
+                  
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium w-fit mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                      {item.category}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-150">{item.title}</h3>
+                    <p className="text-white/90 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-200">{item.description}</p>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-6 text-white">
-                      <h3 className="text-lg font-bold mb-1">{item.title}</h3>
-                      <p className="text-sm text-white/80">{item.description}</p>
-                    </div>
-                  </div>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-4 right-4 w-12 h-12 rounded-full border-2 border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="absolute bottom-4 left-4 w-20 h-1 bg-white/50 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300"></div>
                 </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-gray-900">{item.title}</h3>
-                  <p className="text-sm text-gray-500">{item.category}</p>
-                </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
+      
+      {/* Full screen image viewer */}
+      {selectedImage !== null && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="absolute top-6 right-6 z-50">
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="text-white text-3xl hover:text-gray-300 transition-colors"
+            >
+              ×
+            </button>
+          </div>
+          
+          <div className="relative w-full max-w-6xl max-h-[80vh] flex items-center justify-center" 
+               onClick={(e) => e.stopPropagation()}>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className={`relative rounded-lg overflow-hidden w-full h-[70vh] bg-gradient-to-br ${filteredItems[selectedImage].color}`}
+            >
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  {filteredItems[selectedImage].title}
+                </h2>
+                <p className="text-xl text-white/90 mb-2">
+                  {filteredItems[selectedImage].description}
+                </p>
+                <p className="text-white/70">
+                  {filteredItems[selectedImage].category}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+          
+          <div className="flex justify-between w-full max-w-6xl mt-6">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                if (selectedImage > 0) setSelectedImage(selectedImage - 1);
+              }}
+              disabled={selectedImage === 0}
+              className={`px-4 py-2 text-white rounded-lg ${selectedImage === 0 ? 'opacity-50 cursor-not-allowed' : 'bg-white/10 hover:bg-white/20'}`}
+            >
+              Previous
+            </button>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                if (selectedImage < filteredItems.length - 1) setSelectedImage(selectedImage + 1);
+              }}
+              disabled={selectedImage === filteredItems.length - 1}
+              className={`px-4 py-2 text-white rounded-lg ${selectedImage === filteredItems.length - 1 ? 'opacity-50 cursor-not-allowed' : 'bg-white/10 hover:bg-white/20'}`}
+            >
+              Next
+            </button>
+          </div>
+        </motion.div>
+      )}
       
       <Footer />
     </div>
