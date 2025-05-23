@@ -52,23 +52,19 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-20 bg-gradient-to-br from-gray-900 to-indigo-900 text-white">
+    <section id="testimonials" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             What Our Users Say
           </h2>
-          <p className="text-xl text-blue-200">
+          <p className="text-xl text-gray-600">
             Join thousands of satisfied users on their wellness journey
           </p>
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden border border-white/20">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-500 rounded-full filter blur-3xl opacity-20 -ml-20 -mb-20"></div>
-            
+          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
             
             <div className="flex items-center justify-center mb-8">
@@ -77,7 +73,7 @@ const Testimonials = () => {
               ))}
             </div>
 
-            <blockquote className="text-xl md:text-2xl text-white text-center mb-8 leading-relaxed">
+            <blockquote className="text-xl md:text-2xl text-gray-700 text-center mb-8 leading-relaxed">
               "{testimonials[currentIndex].content}"
             </blockquote>
 
@@ -86,10 +82,10 @@ const Testimonials = () => {
                 {testimonials[currentIndex].avatar}
               </div>
               <div className="text-center">
-                <div className="font-bold text-white text-lg">
+                <div className="font-bold text-gray-900 text-lg">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-blue-200">
+                <div className="text-gray-600">
                   {testimonials[currentIndex].role}
                 </div>
               </div>
@@ -98,9 +94,9 @@ const Testimonials = () => {
             <div className="flex justify-center items-center mt-8 space-x-4">
               <button
                 onClick={prevTestimonial}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200 border border-white/30"
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
               >
-                <ChevronLeft size={20} className="text-white" />
+                <ChevronLeft size={20} />
               </button>
               
               <div className="flex space-x-2">
@@ -109,7 +105,7 @@ const Testimonials = () => {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                      index === currentIndex ? 'bg-blue-400 scale-125' : 'bg-white/30'
+                      index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
                     }`}
                   />
                 ))}
@@ -117,9 +113,9 @@ const Testimonials = () => {
 
               <button
                 onClick={nextTestimonial}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200 border border-white/30"
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
               >
-                <ChevronRight size={20} className="text-white" />
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>
