@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ArrowRight, Search, Calendar, User, Tag, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -11,7 +11,7 @@ const Blog = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [featuredPost, setFeaturedPost] = useState<number | null>(null);
 
-  // Sample blog posts - these would typically come from a CMS or database
+  // Sample blog posts - updated type to include optional image property
   const blogPosts = [
     {
       id: 1,
@@ -21,7 +21,8 @@ const Blog = () => {
       author: "Major Sharma",
       category: "Mental Wellness",
       readTime: "7 min read",
-      color: "from-blue-500 to-indigo-600"
+      color: "from-blue-500 to-indigo-600",
+      image: undefined // Added optional image property
     },
     {
       id: 2,
@@ -31,7 +32,8 @@ const Blog = () => {
       author: "Dr. Patel",
       category: "Digital Detox",
       readTime: "5 min read",
-      color: "from-purple-500 to-pink-600"
+      color: "from-purple-500 to-pink-600",
+      image: undefined // Added optional image property
     },
     {
       id: 3,
@@ -41,7 +43,8 @@ const Blog = () => {
       author: "Col. Verma",
       category: "Leadership",
       readTime: "6 min read",
-      color: "from-green-500 to-teal-600"
+      color: "from-green-500 to-teal-600",
+      image: undefined // Added optional image property
     },
     {
       id: 4,
@@ -51,7 +54,8 @@ const Blog = () => {
       author: "Prof. Nair",
       category: "Communication",
       readTime: "8 min read",
-      color: "from-orange-500 to-red-600"
+      color: "from-orange-500 to-red-600",
+      image: undefined // Added optional image property
     },
     {
       id: 5,
@@ -61,7 +65,8 @@ const Blog = () => {
       author: "Ravi Kumar",
       category: "Adventure",
       readTime: "4 min read",
-      color: "from-cyan-500 to-blue-600"
+      color: "from-cyan-500 to-blue-600",
+      image: undefined // Added optional image property
     },
     {
       id: 6,
@@ -71,7 +76,8 @@ const Blog = () => {
       author: "Dr. Mehra",
       category: "Digital Detox",
       readTime: "6 min read",
-      color: "from-rose-500 to-pink-600"
+      color: "from-rose-500 to-pink-600",
+      image: undefined // Added optional image property
     }
   ];
 
