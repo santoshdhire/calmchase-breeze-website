@@ -1,43 +1,43 @@
 
 import React from 'react';
-import { Brain, Heart, Moon, Zap, Shield, Users } from 'lucide-react';
+import { Medal, Shield, Zap, Hammer, Users, Brain } from 'lucide-react';
 
 const Features = () => {
   const features = [
     {
-      icon: Brain,
-      title: "Mindfulness Training",
-      description: "Guided meditation sessions designed to improve focus and reduce anxiety.",
+      icon: Medal,
+      title: "SSB Preparation Program",
+      description: "Comprehensive training program with excellent results for candidates aspiring to join the defence forces.",
       color: "from-blue-500 to-cyan-500"
     },
     {
-      icon: Heart,
-      title: "Stress Relief",
-      description: "Proven techniques to help you manage stress and find inner peace.",
+      icon: Brain,
+      title: "Digital Detox Programs",
+      description: "7-day and 21-day programs designed to help individuals break free from digital addiction and regain focus.",
       color: "from-pink-500 to-rose-500"
     },
     {
-      icon: Moon,
-      title: "Better Sleep",
-      description: "Sleep stories and relaxation exercises for restful nights.",
+      icon: Shield,
+      title: "Personality Development",
+      description: "Holistic programs focused on leadership, communication, social intelligence, and decision-making skills.",
       color: "from-purple-500 to-indigo-500"
     },
     {
       icon: Zap,
-      title: "Energy Boost",
-      description: "Revitalize your mind and body with our energizing practices.",
+      title: "Leadership Training",
+      description: "Learn effective leadership strategies to inspire and guide teams toward success.",
       color: "from-yellow-500 to-orange-500"
     },
     {
-      icon: Shield,
-      title: "Mental Wellness",
-      description: "Comprehensive approach to maintaining psychological well-being.",
+      icon: Hammer,
+      title: "Resilience Building",
+      description: "Develop mental fortitude to overcome obstacles and thrive under pressure.",
       color: "from-green-500 to-emerald-500"
     },
     {
       icon: Users,
       title: "Community Support",
-      description: "Connect with like-minded individuals on their wellness journey.",
+      description: "Join a thriving community of like-minded individuals on their self-improvement journey.",
       color: "from-violet-500 to-purple-500"
     }
   ];
@@ -47,11 +47,11 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Why Choose 
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> CalmChase?</span>
+            Our 
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Programs</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Experience a comprehensive wellness platform designed to transform your mental health and daily life.
+            Transform your life with our holistic personality development platform designed to enhance your skills and wellbeing.
           </p>
         </div>
 

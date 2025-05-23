@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,15 +32,17 @@ const Navigation = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Home</a>
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Features</a>
+              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Programs</a>
               <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Reviews</a>
+              <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Blog</Link>
+              <Link to="/gallery" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Gallery</Link>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Contact</a>
             </div>
           </div>
 
           <div className="hidden md:block">
             <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-              Get Started
+              Enroll Now
             </button>
           </div>
 
@@ -58,11 +61,13 @@ const Navigation = () => {
         <div className="md:hidden bg-white/95 backdrop-blur-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a href="#home" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
-            <a href="#features" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Features</a>
+            <a href="#features" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Programs</a>
             <a href="#testimonials" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Reviews</a>
+            <Link to="/blog" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Blog</Link>
+            <Link to="/gallery" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Gallery</Link>
             <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Contact</a>
             <button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full">
-              Get Started
+              Enroll Now
             </button>
           </div>
         </div>
