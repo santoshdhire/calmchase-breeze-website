@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 
@@ -121,28 +122,29 @@ const MindfulnessInteractive = () => {
   
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 -z-10"></div>
+      {/* Background with 3D effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 -z-10"></div>
       
-      {/* Animated circles in background */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        {[...Array(6)].map((_, i) => (
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden -z-5">
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-white"
             style={{
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
+              width: `${Math.random() * 5 + 2}px`,
+              height: `${Math.random() * 5 + 2}px`,
               x: `${Math.random() * 100}%`,
               y: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.2 + 0.05
+              opacity: Math.random() * 0.4 + 0.2
             }}
             animate={{
-              x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
               y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
+              x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
+              opacity: [0.2 + Math.random() * 0.3, 0.5 + Math.random() * 0.3, 0.2 + Math.random() * 0.3]
             }}
             transition={{
-              duration: Math.random() * 60 + 60,
+              duration: Math.random() * 20 + 20,
               repeat: Infinity,
               repeatType: "reverse",
               ease: "easeInOut"
@@ -159,10 +161,13 @@ const MindfulnessInteractive = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Take a <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mindful Moment</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="relative inline-block">
+            <div className="absolute -inset-1 bg-gradient-to-r from-teal-400 to-blue-500 rounded-lg blur opacity-50"></div>
+            <h2 className="relative text-4xl md:text-5xl font-bold text-white mb-4 px-4 py-2">
+              Take a <span className="bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">Mindful Moment</span>
+            </h2>
+          </div>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mt-4">
             Practice a guided breathing exercise to calm your mind and reduce stress.
           </p>
         </motion.div>
@@ -170,11 +175,23 @@ const MindfulnessInteractive = () => {
         <div className="flex flex-col items-center justify-center max-w-4xl mx-auto">
           {/* Breathing exercise */}
           <div className="relative mb-10 flex flex-col items-center">
-            {/* Breathing circle */}
-            <div className="mb-10 relative">
+            {/* Breathing circle with 3D glow */}
+            <div className="mb-10 relative group">
+              <motion.div 
+                className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                animate={{
+                  scale: isActive ? [1, 1.05, 1] : 1,
+                  opacity: isActive ? [0.7, 0.9, 0.7] : 0.7
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: isActive ? Infinity : 0,
+                  repeatType: "reverse"
+                }}
+              ></motion.div>
               <motion.div 
                 animate={circleAnimation}
-                className={`w-64 h-64 rounded-full bg-gradient-to-r ${breathingPattern[currentStep].color} shadow-lg flex items-center justify-center`}
+                className={`w-64 h-64 rounded-full bg-gradient-to-r ${breathingPattern[currentStep].color} shadow-lg flex items-center justify-center relative z-10`}
               >
                 <motion.div 
                   animate={textAnimation}
@@ -186,31 +203,38 @@ const MindfulnessInteractive = () => {
               </motion.div>
               
               {/* Progress circles */}
-              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
                 {breathingPattern.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                    className={`h-3 w-3 rounded-full transition-colors duration-500 ${
                       index === currentStep
-                        ? "bg-blue-500"
-                        : "bg-gray-300"
+                        ? "bg-blue-400 shadow-md shadow-blue-400/50"
+                        : "bg-gray-400/30"
                     }`}
                   ></div>
                 ))}
               </div>
             </div>
             
-            {/* Control button */}
-            <button
-              onClick={toggleActive}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+            {/* Control button with glow */}
+            <div className="relative group">
+              <div className={`absolute -inset-1 rounded-full blur-sm transition-all duration-300 ${
                 isActive 
-                  ? "bg-red-500 hover:bg-red-600 text-white"
-                  : "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
-              }`}
-            >
-              {isActive ? "Stop" : "Start Breathing Exercise"}
-            </button>
+                  ? "bg-red-500/70 group-hover:bg-red-600/90"
+                  : "bg-gradient-to-r from-blue-600 to-purple-600 group-hover:opacity-90"
+              }`}></div>
+              <button
+                onClick={toggleActive}
+                className={`relative px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
+                  isActive 
+                    ? "bg-red-500 hover:bg-red-600 text-white"
+                    : "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
+                }`}
+              >
+                {isActive ? "Stop" : "Start Breathing Exercise"}
+              </button>
+            </div>
             
             {/* Mindfulness quote */}
             <AnimatePresence mode="wait">
@@ -220,9 +244,9 @@ const MindfulnessInteractive = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="mt-10 max-w-xl text-center"
+                className="mt-12 max-w-xl text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-lg"
               >
-                <p className="text-lg text-gray-700 italic">"{quote}"</p>
+                <p className="text-lg text-white italic">"{quote}"</p>
               </motion.div>
             </AnimatePresence>
             
@@ -232,16 +256,16 @@ const MindfulnessInteractive = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="mt-8 text-center"
+                className="mt-6 text-center"
               >
-                <p className="text-sm text-gray-600">
-                  <span className="font-bold text-purple-600">{completedCycles}</span> {completedCycles === 1 ? 'cycle' : 'cycles'} completed
+                <p className="text-white/80">
+                  <span className="font-bold text-teal-300 text-lg">{completedCycles}</span> {completedCycles === 1 ? 'cycle' : 'cycles'} completed
                 </p>
               </motion.div>
             )}
           </div>
           
-          {/* Benefits cards */}
+          {/* Benefits cards with 3D effect */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -272,11 +296,18 @@ const MindfulnessInteractive = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                whileHover={{ 
+                  y: -10,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)"
+                }}
+                className="relative group"
               >
-                <div className="text-4xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur-sm opacity-70 group-hover:opacity-100 transition-all duration-300"></div>
+                <div className="relative bg-black/30 backdrop-blur-md rounded-2xl p-6 border border-white/20 h-full">
+                  <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{benefit.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-2">{benefit.title}</h3>
+                  <p className="text-white/80">{benefit.description}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
