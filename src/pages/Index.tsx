@@ -7,6 +7,9 @@ import CTA from '../components/CTA';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import InteractiveQuiz from '../components/InteractiveQuiz';
+import OurActivities from '../components/OurActivities';
+import OurPride from '../components/OurPride';
+import MindfulnessInteractive from '../components/MindfulnessInteractive';
 
 const Index = () => {
   return (
@@ -14,7 +17,10 @@ const Index = () => {
       <Navigation />
       <Hero />
       <Features />
+      <OurActivities />
       <InteractiveQuiz />
+      <OurPride />
+      <MindfulnessInteractive />
       <Testimonials />
       <CTA />
       <Footer />

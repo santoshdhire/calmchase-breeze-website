@@ -21,55 +21,64 @@ const Gallery = () => {
       category: "SSB Programs",
       title: "Group Task Activity",
       description: "Candidates working together to solve complex problems during SSB preparation.",
-      color: "from-blue-500 to-indigo-600"
+      color: "from-blue-500 to-indigo-600",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
     },
     {
       category: "Digital Detox",
       title: "Meditation Session",
       description: "Participants practicing mindfulness during the 21-day digital detox program.",
-      color: "from-purple-500 to-pink-600"
+      color: "from-purple-500 to-pink-600",
+      image: "https://images.unsplash.com/photo-1551818905-29c07d4802d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
     },
     {
       category: "Personality Development",
       title: "Public Speaking Workshop",
       description: "Students developing communication skills through public speaking exercises.",
-      color: "from-green-500 to-emerald-600"
+      color: "from-green-500 to-emerald-600",
+      image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Adventure Club",
       title: "Mountain Trekking",
       description: "Adventure club members building resilience through challenging treks.",
-      color: "from-orange-500 to-red-600"
+      color: "from-orange-500 to-red-600",
+      image: "https://images.unsplash.com/photo-1501554728187-ce583db33af7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
     },
     {
       category: "SSB Programs",
       title: "Interview Preparation",
       description: "Mock interview sessions to prepare candidates for SSB interviews.",
-      color: "from-blue-600 to-cyan-500"
+      color: "from-blue-600 to-cyan-500",
+      image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Digital Detox",
       title: "Nature Connect",
       description: "Digital detox participants reconnecting with nature through outdoor activities.",
-      color: "from-pink-500 to-purple-600"
+      color: "from-pink-500 to-purple-600",
+      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80"
     },
     {
       category: "Personality Development",
       title: "Team Building",
       description: "Interactive team building exercises to develop leadership skills.",
-      color: "from-teal-500 to-green-600"
+      color: "from-teal-500 to-green-600",
+      image: "https://images.unsplash.com/photo-1561489413-985b06da5bee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Adventure Club",
       title: "Rock Climbing",
       description: "Building confidence through challenging physical activities.",
-      color: "from-red-500 to-orange-600"
+      color: "from-red-500 to-orange-600",
+      image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1303&q=80"
     },
     {
       category: "SSB Programs",
       title: "Graduation Ceremony",
       description: "Successful candidates celebrating their selection into defense forces.",
-      color: "from-indigo-500 to-blue-600"
+      color: "from-indigo-500 to-blue-600",
+      image: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     }
   ];
   
@@ -166,7 +175,34 @@ const Gallery = () => {
                 className="break-inside-avoid cursor-pointer"
               >
                 <div className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 h-[350px] sm:h-[${Math.floor(Math.random() * 150) + 250}px]`}>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80`}></div>
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-br opacity-70 transition-opacity duration-300 group-hover:opacity-80" style={{
+                    backgroundImage: `linear-gradient(to bottom right, ${item.color.includes('from-blue-500') ? '#3b82f6' : 
+                      item.color.includes('from-purple-500') ? '#a855f7' :
+                      item.color.includes('from-green-500') ? '#22c55e' :
+                      item.color.includes('from-orange-500') ? '#f97316' :
+                      item.color.includes('from-blue-600') ? '#2563eb' :
+                      item.color.includes('from-pink-500') ? '#ec4899' :
+                      item.color.includes('from-teal-500') ? '#14b8a6' :
+                      item.color.includes('from-red-500') ? '#ef4444' :
+                      item.color.includes('from-indigo-500') ? '#6366f1' : '#3b82f6'
+                    }, ${
+                      item.color.includes('to-indigo-600') ? '#4f46e5' : 
+                      item.color.includes('to-pink-600') ? '#db2777' :
+                      item.color.includes('to-emerald-600') ? '#059669' :
+                      item.color.includes('to-red-600') ? '#dc2626' :
+                      item.color.includes('to-cyan-500') ? '#06b6d4' :
+                      item.color.includes('to-purple-600') ? '#9333ea' :
+                      item.color.includes('to-green-600') ? '#16a34a' :
+                      item.color.includes('to-orange-600') ? '#ea580c' :
+                      item.color.includes('to-blue-600') ? '#2563eb' : '#4f46e5'
+                    })`
+                  }}></div>
                   
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
                   
@@ -213,9 +249,14 @@ const Gallery = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className={`relative rounded-lg overflow-hidden w-full h-[70vh] bg-gradient-to-br ${filteredItems[selectedImage].color}`}
+              className="relative rounded-lg overflow-hidden w-full h-[70vh]"
             >
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <img 
+                src={filteredItems[selectedImage].image} 
+                alt={filteredItems[selectedImage].title}
+                className="w-full h-full object-contain" 
+              />
+              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {filteredItems[selectedImage].title}
                 </h2>

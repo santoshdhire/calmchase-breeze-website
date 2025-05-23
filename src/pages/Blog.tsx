@@ -212,13 +212,13 @@ const Blog = () => {
                       <ul className="space-y-3">
                         {filteredPosts.slice(0, 5).map((post) => (
                           <li key={post.id}>
-                            <a href="#" className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                            <Link to={`/blog/${post.id}`} className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg">
                               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${post.color} flex-shrink-0`}></div>
                               <div>
                                 <h3 className="font-medium text-gray-900">{post.title}</h3>
                                 <p className="text-sm text-gray-500">{post.category} • {post.readTime}</p>
                               </div>
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -243,46 +243,54 @@ const Blog = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mb-16"
             >
-              <div className={`relative overflow-hidden rounded-2xl shadow-xl bg-gradient-to-r ${blogPosts[featuredPost].color}`}>
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="relative p-8 md:p-12 text-white">
-                  <div className="mb-6">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm">
-                      Featured Article
-                    </span>
+              <Link to={`/blog/${blogPosts[featuredPost].id}`}>
+                <div className={`relative overflow-hidden rounded-2xl shadow-xl bg-gradient-to-r ${blogPosts[featuredPost].color}`}>
+                  {blogPosts[featuredPost].image && (
+                    <img 
+                      src={blogPosts[featuredPost].image}
+                      alt={blogPosts[featuredPost].title}
+                      className="absolute inset-0 w-full h-full object-cover mix-blend-overlay"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="relative p-8 md:p-12 text-white">
+                    <div className="mb-6">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm">
+                        Featured Article
+                      </span>
+                    </div>
+                    
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 max-w-2xl">
+                      {blogPosts[featuredPost].title}
+                    </h2>
+                    
+                    <p className="text-white/90 text-xl mb-8 max-w-2xl">
+                      {blogPosts[featuredPost].excerpt}
+                    </p>
+                    
+                    <div className="flex flex-wrap items-center gap-6 mb-8">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={18} className="opacity-80" />
+                        <span>{blogPosts[featuredPost].date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <User size={18} className="opacity-80" />
+                        <span>{blogPosts[featuredPost].author}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Tag size={18} className="opacity-80" />
+                        <span>{blogPosts[featuredPost].category}</span>
+                      </div>
+                    </div>
+                    
+                    <div 
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 px-6 py-3 rounded-full text-white font-medium transition-all duration-200"
+                    >
+                      Read Article <ArrowRight size={18} />
+                    </div>
                   </div>
-                  
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 max-w-2xl">
-                    {blogPosts[featuredPost].title}
-                  </h2>
-                  
-                  <p className="text-white/90 text-xl mb-8 max-w-2xl">
-                    {blogPosts[featuredPost].excerpt}
-                  </p>
-                  
-                  <div className="flex flex-wrap items-center gap-6 mb-8">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={18} className="opacity-80" />
-                      <span>{blogPosts[featuredPost].date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <User size={18} className="opacity-80" />
-                      <span>{blogPosts[featuredPost].author}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Tag size={18} className="opacity-80" />
-                      <span>{blogPosts[featuredPost].category}</span>
-                    </div>
-                  </div>
-                  
-                  <a 
-                    href="#" 
-                    className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 px-6 py-3 rounded-full text-white font-medium transition-all duration-200"
-                  >
-                    Read Article <ArrowRight size={18} />
-                  </a>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           )}
 
@@ -296,16 +304,31 @@ const Blog = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <div className={`h-40 bg-gradient-to-r ${post.color} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/80 font-light italic text-sm">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
+                <Link to={`/blog/${post.id}`} className="h-40 overflow-hidden">
+                  {post.image && (
+                    <img 
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  )}
+                  {!post.image && (
+                    <div className={`h-full bg-gradient-to-r ${post.color} relative overflow-hidden`}>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white/80 font-light italic text-sm">
+                          {post.category}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </Link>
                 
                 <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{post.title}</h3>
+                  <Link to={`/blog/${post.id}`}>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 hover:text-blue-600 transition-colors">
+                      {post.title}
+                    </h3>
+                  </Link>
                   <p className="text-gray-600 mb-4 flex-1">{post.excerpt}</p>
                   
                   <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
@@ -313,13 +336,13 @@ const Blog = () => {
                     <span>{post.readTime}</span>
                   </div>
                   
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={`/blog/${post.id}`}
                     className="group inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200"
                   >
                     Read More 
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={16} />
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             ))}
