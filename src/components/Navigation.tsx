@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -26,8 +25,8 @@ const Navigation = () => {
           <div className="flex-shrink-0">
             <h1 className={`text-3xl font-bold bg-gradient-to-r transition-all duration-300 ${
               isScrolled 
-                ? 'from-blue-600 to-purple-600 bg-clip-text text-transparent' 
-                : 'from-white to-cyan-200 bg-clip-text text-transparent'
+                ? 'from-blue-600 to-cyan-600 bg-clip-text text-transparent' 
+                : 'from-white to-gray-100 bg-clip-text text-transparent'
             }`}>
               CalmChase
             </h1>
@@ -36,19 +35,19 @@ const Navigation = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <Link to="/" className={`transition-colors duration-300 text-lg font-medium ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}>Home</Link>
               <Link to="/programs" className={`transition-colors duration-300 text-lg font-medium ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}>Programs</Link>
               <Link to="/gallery" className={`transition-colors duration-300 text-lg font-medium ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}>Gallery</Link>
               <Link to="/blog" className={`transition-colors duration-300 text-lg font-medium ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}>Blog</Link>
               <a href="#contact" className={`transition-colors duration-300 text-lg font-medium ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}>Contact</a>
             </div>
           </div>
@@ -56,8 +55,8 @@ const Navigation = () => {
           <div className="hidden md:block">
             <button className={`px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
               isScrolled 
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg' 
-                : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:shadow-cyan-400/25'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:shadow-lg' 
+                : 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/30 hover:shadow-white/25'
             }`}>
               Enroll Now
             </button>
@@ -67,7 +66,7 @@ const Navigation = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`transition-colors duration-300 ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-cyan-300'
+                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
               }`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -84,7 +83,7 @@ const Navigation = () => {
             <Link to="/gallery" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">Gallery</Link>
             <Link to="/blog" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">Blog</Link>
             <a href="#contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">Contact</a>
-            <button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-semibold">
+            <button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2 rounded-full font-semibold">
               Enroll Now
             </button>
           </div>
