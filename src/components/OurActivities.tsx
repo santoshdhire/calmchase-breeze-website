@@ -53,7 +53,7 @@ const OurActivities = () => {
   };
 
   return (
-    <section className="py-20 overflow-hidden bg-gradient-to-r from-gray-50 to-blue-50">
+    <section className="py-10 overflow-hidden bg-gradient-to-r from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div 

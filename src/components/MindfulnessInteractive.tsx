@@ -203,7 +203,7 @@ const MindfulnessInteractive = () => {
             {/* Control button */}
             <button
               onClick={toggleActive}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 mt-4 rounded-full font-medium transition-all duration-300 ${
                 isActive 
                   ? "bg-red-500 hover:bg-red-600 text-white"
                   : "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
@@ -247,7 +247,7 @@ const MindfulnessInteractive = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-0"
           >
             {[
               {
@@ -274,8 +274,10 @@ const MindfulnessInteractive = () => {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <div className="text-4xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{benefit.title}</h3>
+                <div className='flex justify-start items-center gap-2'>
+                <div className="text-4xl ">{benefit.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 ">{benefit.title}</h3>
+                </div>
                 <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}

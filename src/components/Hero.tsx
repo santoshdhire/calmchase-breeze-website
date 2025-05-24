@@ -4,7 +4,7 @@ import { ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen mt-24 sm:mt-0 pt-10 sm:pt-0 flex items-center justify-center overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
@@ -41,7 +41,7 @@ const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-2xl mx-auto">
+          <div className="pb-10 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-gray-900">40+</div>
               <div className="text-gray-600">Selected in Defence Forces</div>
