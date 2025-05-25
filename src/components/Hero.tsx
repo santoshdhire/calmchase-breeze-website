@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 
@@ -14,17 +13,14 @@ const Hero = () => {
   const mainText = "Chase Your Goals";
   const subText = "With Calmness";
   
-  // Calculate the total scroll needed for all letters to disappear
-  const totalLetters = mainText.length + subText.length;
-  const scrollThreshold = totalLetters * 30; // Adjust this value to control how much scroll is needed
-  
   // Generate random factors for each letter to create varied movement
   const getRandomFactor = (index: number, text: string) => {
+    // Use character position to generate consistent random values
     const seed = text.charCodeAt(index % text.length) + index;
     return {
-      speed: 0.8 + (seed % 7) * 0.15, // Increased speed for faster movement
-      delay: (seed % 5) * 25,
-      maxDistance: 150 + (seed % 10) * 30,
+      speed: 0.3 + (seed % 7) * 0.1, // Random speed between 0.3-0.9
+      delay: (seed % 5) * 20, // Random delay 0-80px scroll
+      maxDistance: 100 + (seed % 10) * 20, // Random max distance 100-280px
     };
   };
 
@@ -33,12 +29,15 @@ const Hero = () => {
     const scrollFactor = scrollY;
     const randomFactor = getRandomFactor(letterIndex, text);
     
-    const baseDelay = isMainText ? 0 : 200;
+    // Different start points for main text vs sub text
+    const baseDelay = isMainText ? 0 : 150;
     const adjustedScroll = Math.max(0, scrollFactor - baseDelay - randomFactor.delay);
     
+    // Calculate upward movement with random factors
     const translateY = adjustedScroll * randomFactor.speed;
     const clampedTranslateY = Math.min(translateY, randomFactor.maxDistance);
     
+    // Keep opacity at 1 so letters don't disappear, just move up
     const opacity = 1;
     
     return {
@@ -60,35 +59,8 @@ const Hero = () => {
     ));
   };
 
-  // Calculate if hero should be sticky (prevent normal scrolling)
-  const isHeroSticky = scrollY < scrollThreshold;
-  
-  // Apply sticky positioning and adjust body scroll
-  useEffect(() => {
-    if (isHeroSticky) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.height = '100vh';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.body.style.height = 'auto';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-      document.body.style.height = 'auto';
-    };
-  }, [isHeroSticky]);
-
   return (
-    <section 
-      id="home" 
-      className={`relative min-h-screen mt-20 sm:mt-0 pt-16 sm:pt-0 flex items-center justify-center overflow-hidden ${
-        isHeroSticky ? 'fixed top-0 left-0 right-0 bottom-0 z-40' : ''
-      }`}
-      style={{
-        height: isHeroSticky ? '100vh' : 'auto',
-      }}
-    >
+    <section id="home" className="relative min-h-screen mt-20 sm:mt-0 pt-16 sm:pt-0 flex items-center justify-center overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
