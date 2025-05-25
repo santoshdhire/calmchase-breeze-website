@@ -14,25 +14,36 @@ const Hero = () => {
   const mainText = "Chase Your Goals";
   const subText = "With Calmness";
   
-  // Calculate letter animations based on scroll
-  const getLetterStyle = (index: number, totalLetters: number) => {
-    const scrollFactor = scrollY * 0.8; // Smooth scroll factor
-    const letterDelay = index * 2; // Stagger effect
-    const translateY = Math.max(0, scrollFactor - letterDelay);
-    const opacity = Math.max(0, 1 - (translateY / 100));
+  // Calculate individual letter animations based on scroll
+  const getLetterStyle = (letterIndex: number, isMainText: boolean) => {
+    const scrollFactor = scrollY * 0.5;
+    
+    // For main text, start disappearing immediately
+    // For sub text, start disappearing after main text is mostly gone
+    const startScrollThreshold = isMainText ? letterIndex * 15 : (mainText.length * 15) + (letterIndex * 15);
+    const endScrollThreshold = startScrollThreshold + 100;
+    
+    let opacity = 1;
+    let translateY = 0;
+    
+    if (scrollFactor > startScrollThreshold) {
+      const progress = Math.min((scrollFactor - startScrollThreshold) / (endScrollThreshold - startScrollThreshold), 1);
+      opacity = Math.max(0, 1 - progress);
+      translateY = progress * 150; // Move upward as it disappears
+    }
     
     return {
-      transform: `translateY(-${translateY}px)`,
       opacity: opacity,
-      transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none', // Smooth when not scrolling
+      transform: `translateY(-${translateY}px)`,
+      transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none',
     };
   };
 
-  const renderAnimatedText = (text: string, startIndex: number = 0) => {
+  const renderAnimatedText = (text: string, isMainText: boolean) => {
     return text.split('').map((char, index) => (
       <span
-        key={startIndex + index}
-        style={getLetterStyle(startIndex + index, mainText.length + subText.length)}
+        key={`${isMainText ? 'main' : 'sub'}-${index}`}
+        style={getLetterStyle(index, isMainText)}
         className="inline-block"
       >
         {char === ' ' ? '\u00A0' : char}
@@ -53,10 +64,10 @@ const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-tight tracking-tight">
             <div className="block mb-2">
-              {renderAnimatedText(mainText, 0)}
+              {renderAnimatedText(mainText, true)}
             </div>
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-black">
-              {renderAnimatedText(subText, mainText.length)}
+              {renderAnimatedText(subText, false)}
             </span>
           </h1>
           
