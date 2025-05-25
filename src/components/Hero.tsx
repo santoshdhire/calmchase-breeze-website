@@ -1,10 +1,47 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
+  const [scrollY, setScrollY] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const mainText = "Chase Your Goals";
+  const subText = "With Calmness";
+  
+  // Calculate letter animations based on scroll
+  const getLetterStyle = (index: number, totalLetters: number) => {
+    const scrollFactor = scrollY * 0.8; // Smooth scroll factor
+    const letterDelay = index * 2; // Stagger effect
+    const translateY = Math.max(0, scrollFactor - letterDelay);
+    const opacity = Math.max(0, 1 - (translateY / 100));
+    
+    return {
+      transform: `translateY(-${translateY}px)`,
+      opacity: opacity,
+      transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none', // Smooth when not scrolling
+    };
+  };
+
+  const renderAnimatedText = (text: string, startIndex: number = 0) => {
+    return text.split('').map((char, index) => (
+      <span
+        key={startIndex + index}
+        style={getLetterStyle(startIndex + index, mainText.length + subText.length)}
+        className="inline-block"
+      >
+        {char === ' ' ? '\u00A0' : char}
+      </span>
+    ));
+  };
+
   return (
-    <section id="home" className="relative min-h-screen mt-24 sm:mt-0 pt-10 sm:pt-0 flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen mt-20 sm:mt-0 pt-16 sm:pt-0 flex items-center justify-center overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
@@ -14,19 +51,33 @@ const Hero = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            Chase Your Goals
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              With Calmness
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-tight tracking-tight">
+            <div className="block mb-2">
+              {renderAnimatedText(mainText, 0)}
+            </div>
+            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-black">
+              {renderAnimatedText(subText, mainText.length)}
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p 
+            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed font-medium"
+            style={{
+              transform: `translateY(-${scrollY * 0.3}px)`,
+              opacity: Math.max(0, 1 - (scrollY / 200)),
+            }}
+          >
             Empowering individuals with self-confidence, mental well-being, and life skills
             through leadership, communication, and resilience.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+            style={{
+              transform: `translateY(-${scrollY * 0.2}px)`,
+              opacity: Math.max(0, 1 - (scrollY / 300)),
+            }}
+          >
             <button className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
               Join Our Programs
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" size={20} />
@@ -41,22 +92,28 @@ const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="pb-10 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-2xl mx-auto">
+          <div 
+            className="pb-10 sm:pb-0 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-4xl mx-auto"
+            style={{
+              transform: `translateY(-${scrollY * 0.1}px)`,
+              opacity: Math.max(0, 1 - (scrollY / 400)),
+            }}
+          >
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">40+</div>
-              <div className="text-gray-600">Selected in Defence Forces</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">40+</div>
+              <div className="text-sm sm:text-base text-gray-600">Selected in Defence Forces</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">450+</div>
-              <div className="text-gray-600">Community Members</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">450+</div>
+              <div className="text-sm sm:text-base text-gray-600">Community Members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">100+</div>
-              <div className="text-gray-600">Tech Club Members</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">100+</div>
+              <div className="text-sm sm:text-base text-gray-600">Tech Club Members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">200+</div>
-              <div className="text-gray-600">Adventure Club Members</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">200+</div>
+              <div className="text-sm sm:text-base text-gray-600">Adventure Club Members</div>
             </div>
           </div>
         </div>
