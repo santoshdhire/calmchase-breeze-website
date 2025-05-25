@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 
@@ -13,45 +14,25 @@ const Hero = () => {
   const mainText = "Chase Your Goals";
   const subText = "With Calmness";
   
-  // Generate random factors for each letter to create varied movement
-  const getRandomFactor = (index: number, text: string) => {
-    // Use character position to generate consistent random values
-    const seed = text.charCodeAt(index % text.length) + index;
-    return {
-      speed: 0.3 + (seed % 7) * 0.1, // Random speed between 0.3-0.9
-      delay: (seed % 5) * 20, // Random delay 0-80px scroll
-      maxDistance: 100 + (seed % 10) * 20, // Random max distance 100-280px
-    };
-  };
-
-  // Calculate individual letter animations with random upward pull
-  const getLetterStyle = (letterIndex: number, isMainText: boolean, text: string) => {
-    const scrollFactor = scrollY;
-    const randomFactor = getRandomFactor(letterIndex, text);
-    
-    // Different start points for main text vs sub text
-    const baseDelay = isMainText ? 0 : 150;
-    const adjustedScroll = Math.max(0, scrollFactor - baseDelay - randomFactor.delay);
-    
-    // Calculate upward movement with random factors
-    const translateY = adjustedScroll * randomFactor.speed;
-    const clampedTranslateY = Math.min(translateY, randomFactor.maxDistance);
-    
-    // Keep opacity at 1 so letters don't disappear, just move up
-    const opacity = 1;
+  // Calculate letter animations based on scroll
+  const getLetterStyle = (index: number, totalLetters: number) => {
+    const scrollFactor = scrollY * 0.8; // Smooth scroll factor
+    const letterDelay = index * 2; // Stagger effect
+    const translateY = Math.max(0, scrollFactor - letterDelay);
+    const opacity = Math.max(0, 1 - (translateY / 100));
     
     return {
+      transform: `translateY(-${translateY}px)`,
       opacity: opacity,
-      transform: `translateY(-${clampedTranslateY}px)`,
-      transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none',
+      transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none', // Smooth when not scrolling
     };
   };
 
-  const renderAnimatedText = (text: string, isMainText: boolean) => {
+  const renderAnimatedText = (text: string, startIndex: number = 0) => {
     return text.split('').map((char, index) => (
       <span
-        key={`${isMainText ? 'main' : 'sub'}-${index}`}
-        style={getLetterStyle(index, isMainText, text)}
+        key={startIndex + index}
+        style={getLetterStyle(startIndex + index, mainText.length + subText.length)}
         className="inline-block"
       >
         {char === ' ' ? '\u00A0' : char}
@@ -72,10 +53,10 @@ const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-tight tracking-tight">
             <div className="block mb-2">
-              {renderAnimatedText(mainText, true)}
+              {renderAnimatedText(mainText, 0)}
             </div>
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-black">
-              {renderAnimatedText(subText, false)}
+              {renderAnimatedText(subText, mainText.length)}
             </span>
           </h1>
           
