@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 
@@ -14,27 +13,36 @@ const Hero = () => {
   const mainText = "Chase Your Goals";
   const subText = "With Calmness";
   
-  // Calculate individual letter animations based on scroll
-  const getLetterStyle = (letterIndex: number, isMainText: boolean) => {
-    const scrollFactor = scrollY * 0.5;
+  // Generate random factors for each letter to create varied movement
+  const getRandomFactor = (index: number, text: string) => {
+    // Use character position to generate consistent random values
+    const seed = text.charCodeAt(index % text.length) + index;
+    return {
+      speed: 0.3 + (seed % 7) * 0.1, // Random speed between 0.3-0.9
+      delay: (seed % 5) * 20, // Random delay 0-80px scroll
+      maxDistance: 100 + (seed % 10) * 20, // Random max distance 100-280px
+    };
+  };
+
+  // Calculate individual letter animations with random upward pull
+  const getLetterStyle = (letterIndex: number, isMainText: boolean, text: string) => {
+    const scrollFactor = scrollY;
+    const randomFactor = getRandomFactor(letterIndex, text);
     
-    // For main text, start disappearing immediately
-    // For sub text, start disappearing after main text is mostly gone
-    const startScrollThreshold = isMainText ? letterIndex * 15 : (mainText.length * 15) + (letterIndex * 15);
-    const endScrollThreshold = startScrollThreshold + 100;
+    // Different start points for main text vs sub text
+    const baseDelay = isMainText ? 0 : 150;
+    const adjustedScroll = Math.max(0, scrollFactor - baseDelay - randomFactor.delay);
     
-    let opacity = 1;
-    let translateY = 0;
+    // Calculate upward movement with random factors
+    const translateY = adjustedScroll * randomFactor.speed;
+    const clampedTranslateY = Math.min(translateY, randomFactor.maxDistance);
     
-    if (scrollFactor > startScrollThreshold) {
-      const progress = Math.min((scrollFactor - startScrollThreshold) / (endScrollThreshold - startScrollThreshold), 1);
-      opacity = Math.max(0, 1 - progress);
-      translateY = progress * 150; // Move upward as it disappears
-    }
+    // Keep opacity at 1 so letters don't disappear, just move up
+    const opacity = 1;
     
     return {
       opacity: opacity,
-      transform: `translateY(-${translateY}px)`,
+      transform: `translateY(-${clampedTranslateY}px)`,
       transition: scrollY === 0 ? 'all 0.3s ease-out' : 'none',
     };
   };
@@ -43,7 +51,7 @@ const Hero = () => {
     return text.split('').map((char, index) => (
       <span
         key={`${isMainText ? 'main' : 'sub'}-${index}`}
-        style={getLetterStyle(index, isMainText)}
+        style={getLetterStyle(index, isMainText, text)}
         className="inline-block"
       >
         {char === ' ' ? '\u00A0' : char}
