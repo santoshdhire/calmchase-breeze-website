@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -108,7 +107,7 @@ const Gallery = () => {
   }, [selectedImage, filteredItems.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Navigation />
       
       <section className="pt-36 pb-16">
@@ -118,7 +117,7 @@ const Gallery = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+              className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
             >
               Our 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Gallery</span>
@@ -127,7 +126,7 @@ const Gallery = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
               Explore moments from our transformative programs that change lives.
             </motion.p>
@@ -150,7 +149,7 @@ const Gallery = () => {
                 className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === category
                     ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                    : "bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700"
+                    : "bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600"
                 }`}
               >
                 {category}

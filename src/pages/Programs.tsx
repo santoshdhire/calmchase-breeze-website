@@ -102,7 +102,7 @@ const Programs = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Navigation />
       
       <section className="pt-36 pb-16">
@@ -112,7 +112,7 @@ const Programs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+              className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
             >
               Our 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Programs</span>
@@ -121,7 +121,7 @@ const Programs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
               Transform your life with our holistic personality development platform designed to enhance your skills and wellbeing.
             </motion.p>
@@ -144,7 +144,7 @@ const Programs = () => {
                 className={`flex items-center gap-3 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeTab === key
                     ? `bg-gradient-to-r ${program.color} text-white shadow-lg`
-                    : "bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700"
+                    : "bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600"
                 }`}
               >
                 <program.icon size={18} />
@@ -171,15 +171,15 @@ const Programs = () => {
                   </div>
                 </div>
                 
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                   {activeProgram.title}
                 </h2>
                 
-                <h3 className="text-xl md:text-2xl text-gray-700 mb-6">
+                <h3 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-6">
                   {activeProgram.subtitle}
                 </h3>
                 
-                <p className="text-gray-600 mb-8 text-lg">
+                <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg">
                   {activeProgram.description}
                 </p>
                 
@@ -189,12 +189,12 @@ const Programs = () => {
                       <div className={`rounded-full p-1 bg-gradient-to-r ${activeProgram.color}`}>
                         <Check className="text-white" size={16} />
                       </div>
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
                 
-                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 mb-8">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 mb-8">
                   <div className="flex items-start gap-4">
                     <div className={`rounded-full p-2 bg-gradient-to-r ${activeProgram.color}`}>
                       <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white font-bold">
@@ -202,9 +202,9 @@ const Programs = () => {
                       </div>
                     </div>
                     <div>
-                      <p className="text-gray-700 italic mb-2">"{activeProgram.testimonial.quote}"</p>
-                      <p className="font-medium text-gray-900">{activeProgram.testimonial.author}</p>
-                      <p className="text-sm text-gray-500">{activeProgram.testimonial.role}</p>
+                      <p className="text-gray-700 dark:text-gray-300 italic mb-2">"{activeProgram.testimonial.quote}"</p>
+                      <p className="font-medium text-gray-900 dark:text-white">{activeProgram.testimonial.author}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{activeProgram.testimonial.role}</p>
                     </div>
                   </div>
                 </div>

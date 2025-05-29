@@ -22,7 +22,7 @@ const Blog = () => {
       category: "Mental Wellness",
       readTime: "7 min read",
       color: "from-blue-500 to-indigo-600",
-      image: undefined // Added optional image property
+      image: undefined
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ const Blog = () => {
       category: "Digital Detox",
       readTime: "5 min read",
       color: "from-purple-500 to-pink-600",
-      image: undefined // Added optional image property
+      image: undefined
     },
     {
       id: 3,
@@ -44,7 +44,7 @@ const Blog = () => {
       category: "Leadership",
       readTime: "6 min read",
       color: "from-green-500 to-teal-600",
-      image: undefined // Added optional image property
+      image: undefined
     },
     {
       id: 4,
@@ -55,7 +55,7 @@ const Blog = () => {
       category: "Communication",
       readTime: "8 min read",
       color: "from-orange-500 to-red-600",
-      image: undefined // Added optional image property
+      image: undefined
     },
     {
       id: 5,
@@ -66,7 +66,7 @@ const Blog = () => {
       category: "Adventure",
       readTime: "4 min read",
       color: "from-cyan-500 to-blue-600",
-      image: undefined // Added optional image property
+      image: undefined
     },
     {
       id: 6,
@@ -77,7 +77,7 @@ const Blog = () => {
       category: "Digital Detox",
       readTime: "6 min read",
       color: "from-rose-500 to-pink-600",
-      image: undefined // Added optional image property
+      image: undefined
     }
   ];
 
@@ -96,7 +96,7 @@ const Blog = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Navigation />
       
       <section className="pt-36 pb-16">
@@ -106,7 +106,7 @@ const Blog = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+              className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
             >
               Insights & 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Inspiration</span>
@@ -115,7 +115,7 @@ const Blog = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
               Explore our collection of articles on personal growth, mindfulness, leadership, and more.
             </motion.p>
@@ -137,7 +137,7 @@ const Blog = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === null
                     ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                    : "bg-white/50 backdrop-blur-sm text-gray-700 hover:bg-white/80"
+                    : "bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/80 border border-gray-200 dark:border-gray-600"
                 }`}
               >
                 All Topics
@@ -152,7 +152,7 @@ const Blog = () => {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                     activeCategory === category
                       ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                      : "bg-white/50 backdrop-blur-sm text-gray-700 hover:bg-white/80"
+                      : "bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/80 border border-gray-200 dark:border-gray-600"
                   }`}
                 >
                   {category}
@@ -165,9 +165,9 @@ const Blog = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsSearchOpen(true)}
-              className="bg-white/50 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-colors duration-200"
+              className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-3 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors duration-200 border border-gray-200 dark:border-gray-600"
             >
-              <Search size={20} className="text-gray-700" />
+              <Search size={20} className="text-gray-700 dark:text-gray-300" />
             </motion.button>
           </motion.div>
           
@@ -186,13 +186,13 @@ const Blog = () => {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-white rounded-2xl p-6 shadow-2xl w-full max-w-2xl mx-4"
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl w-full max-w-2xl mx-4 border border-gray-200 dark:border-gray-700"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-gray-900">Search Articles</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Search Articles</h2>
                     <button 
                       onClick={() => setIsSearchOpen(false)}
-                      className="text-gray-500 hover:text-gray-700 transition-colors"
+                      className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                     >
                       <X size={24} />
                     </button>
@@ -205,24 +205,24 @@ const Blog = () => {
                       placeholder="Search by title, content, or category..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
                       autoFocus
                     />
                   </div>
                   
                   {searchTerm && (
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 mb-3">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
                         {filteredPosts.length} {filteredPosts.length === 1 ? 'result' : 'results'} found
                       </p>
                       <ul className="space-y-3">
                         {filteredPosts.slice(0, 5).map((post) => (
                           <li key={post.id}>
-                            <Link to={`/blog/${post.id}`} className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                            <Link to={`/blog/${post.id}`} className="flex items-start gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
                               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${post.color} flex-shrink-0`}></div>
                               <div>
-                                <h3 className="font-medium text-gray-900">{post.title}</h3>
-                                <p className="text-sm text-gray-500">{post.category} • {post.readTime}</p>
+                                <h3 className="font-medium text-gray-900 dark:text-white">{post.title}</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{post.category} • {post.readTime}</p>
                               </div>
                             </Link>
                           </li>
@@ -230,7 +230,7 @@ const Blog = () => {
                       </ul>
                       <button 
                         onClick={() => setIsSearchOpen(false)}
-                        className="mt-4 w-full py-2 text-center text-blue-600 font-medium hover:underline"
+                        className="mt-4 w-full py-2 text-center text-blue-600 dark:text-blue-400 font-medium hover:underline"
                       >
                         View all results
                       </button>
@@ -308,7 +308,7 @@ const Blog = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-200 dark:border-gray-700"
               >
                 <Link to={`/blog/${post.id}`} className="h-40 overflow-hidden">
                   {post.image && (
@@ -331,20 +331,20 @@ const Blog = () => {
                 
                 <div className="p-6 flex-1 flex flex-col">
                   <Link to={`/blog/${post.id}`}>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       {post.title}
                     </h3>
                   </Link>
-                  <p className="text-gray-600 mb-4 flex-1">{post.excerpt}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 flex-1">{post.excerpt}</p>
                   
-                  <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+                  <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <span>{post.author}</span>
                     <span>{post.readTime}</span>
                   </div>
                   
                   <Link 
                     to={`/blog/${post.id}`}
-                    className="group inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200"
+                    className="group inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
                   >
                     Read More 
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={16} />
@@ -360,13 +360,13 @@ const Blog = () => {
               animate={{ opacity: 1 }}
               className="text-center py-12"
             >
-              <p className="text-xl text-gray-600">No articles found matching your criteria.</p>
+              <p className="text-xl text-gray-600 dark:text-gray-400">No articles found matching your criteria.</p>
               <button 
                 onClick={() => {
                   setActiveCategory(null);
                   setSearchTerm('');
                 }}
-                className="mt-4 text-blue-600 hover:underline"
+                className="mt-4 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 Clear filters
               </button>

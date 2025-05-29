@@ -53,6 +53,11 @@ const InteractiveQuizCompact = () => {
     if (answerIndex === questions[currentQuestion].correct) {
       setScore(score + 1);
     }
+
+    // Auto-advance after 2 seconds
+    setTimeout(() => {
+      nextQuestion();
+    }, 2000);
   };
 
   const nextQuestion = () => {
@@ -82,20 +87,20 @@ const InteractiveQuizCompact = () => {
 
   if (quizCompleted) {
     return (
-      <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-center bg-white rounded-2xl shadow-xl p-8"
+            className="text-center bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700"
           >
             <Trophy className="mx-auto text-yellow-500 mb-4" size={64} />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Quiz Complete!</h2>
-            <p className="text-xl text-gray-600 mb-4">
-              You scored <span className="font-bold text-purple-600">{score}</span> out of <span className="font-bold">{questions.length}</span>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Quiz Complete!</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
+              You scored <span className="font-bold text-purple-600 dark:text-purple-400">{score}</span> out of <span className="font-bold">{questions.length}</span>
             </p>
-            <p className="text-lg text-gray-700 mb-6">{getScoreMessage()}</p>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">{getScoreMessage()}</p>
             <button
               onClick={resetQuiz}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200"
@@ -110,7 +115,7 @@ const InteractiveQuizCompact = () => {
   }
 
   return (
-    <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -119,10 +124,10 @@ const InteractiveQuizCompact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
             Test Your <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Knowledge</span>
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Quick assessment of your personal development understanding
           </p>
         </motion.div>
@@ -131,15 +136,15 @@ const InteractiveQuizCompact = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-2xl shadow-xl p-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700"
         >
           {/* Progress bar */}
           <div className="mb-6">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
               <span>Question {currentQuestion + 1} of {questions.length}</span>
               <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}% Complete</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div 
                 className="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
@@ -148,7 +153,7 @@ const InteractiveQuizCompact = () => {
           </div>
 
           {/* Question */}
-          <h3 className="text-xl font-bold text-gray-900 mb-6">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
             {questions[currentQuestion].question}
           </h3>
 
@@ -164,11 +169,11 @@ const InteractiveQuizCompact = () => {
                 className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
                   showResult
                     ? index === questions[currentQuestion].correct
-                      ? 'border-green-500 bg-green-50 text-green-800'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-400'
                       : index === selectedAnswer
-                      ? 'border-red-500 bg-red-50 text-red-800'
-                      : 'border-gray-200 bg-gray-50 text-gray-600'
-                    : 'border-gray-200 hover:border-purple-300 hover:bg-purple-50'
+                      ? 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-400'
+                      : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-gray-700 dark:text-gray-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -196,31 +201,14 @@ const InteractiveQuizCompact = () => {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl"
+                className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl"
               >
-                <p className="text-blue-800">
+                <p className="text-blue-800 dark:text-blue-300">
                   <strong>Explanation:</strong> {questions[currentQuestion].explanation}
                 </p>
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Next button */}
-          {showResult && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-center"
-            >
-              <button
-                onClick={nextQuestion}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200"
-              >
-                {currentQuestion < questions.length - 1 ? 'Next Question' : 'View Results'}
-              </button>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </section>
