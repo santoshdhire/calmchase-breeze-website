@@ -50,7 +50,7 @@ const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-16 bg-white">
+    <section id="features" className="py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -59,11 +59,11 @@ const Features = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Our 
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Programs</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Transform your life with our holistic personality development platform designed to enhance your skills and wellbeing.
           </p>
         </motion.div>
@@ -94,7 +94,7 @@ const Features = () => {
                 scale: 1.05,
                 y: -10
               }}
-              className="group p-6 bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden relative"
+              className="group p-6 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-600 overflow-hidden relative"
             >
               {/* Background gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
@@ -106,12 +106,12 @@ const Features = () => {
                   <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                     <feature.icon className="text-white" size={24} />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 flex-1">
                     {feature.title}
                   </h3>
                 </div>
                 
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
                   {feature.description}
                 </p>
               </div>

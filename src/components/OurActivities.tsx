@@ -53,7 +53,7 @@ const OurActivities = () => {
   };
 
   return (
-    <section className="py-10 overflow-hidden bg-gradient-to-r from-gray-50 to-blue-50">
+    <section className="py-10 overflow-hidden bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div 
@@ -66,7 +66,7 @@ const OurActivities = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Activities</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Transformative programs designed to develop every aspect of your personality and potential.
           </p>
         </motion.div>
@@ -76,23 +76,23 @@ const OurActivities = () => {
           {/* Left scroll button */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm hover:bg-white h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
           >
-            <ChevronLeft className="text-gray-700" />
+            <ChevronLeft className="text-gray-700 dark:text-gray-300" />
           </button>
           
           {/* Right scroll button */}
           <button 
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm hover:bg-white h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
           >
-            <ChevronRight className="text-gray-700" />
+            <ChevronRight className="text-gray-700 dark:text-gray-300" />
           </button>
           
           {/* Scrollable container */}
           <div 
             ref={containerRef}
-            className="flex overflow-x-auto hide-scrollbar py-8 px-5 -mx-5 snap-x snap-mandatory"
+            className="flex overflow-x-auto py-8 px-5 -mx-5 snap-x snap-mandatory scrollbar-hide"
           >
             {activities.map((activity, index) => (
               <motion.div
@@ -102,7 +102,7 @@ const OurActivities = () => {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className="min-w-[300px] md:min-w-[400px] snap-center px-5"
               >
-                <div className="bg-white rounded-xl overflow-hidden shadow-xl h-full transform hover:-translate-y-2 transition-all duration-300">
+                <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl h-full transform hover:-translate-y-2 transition-all duration-300">
                   <div className="h-48 overflow-hidden relative">
                     <img 
                       src={activity.image} 
@@ -113,8 +113,8 @@ const OurActivities = () => {
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{activity.title}</h3>
-                    <p className="text-gray-600 mb-4">{activity.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{activity.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{activity.description}</p>
                     
                     <button className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${activity.color} bg-clip-text text-transparent`}>
                       Learn more

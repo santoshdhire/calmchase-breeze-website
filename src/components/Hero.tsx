@@ -66,23 +66,23 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen mt-24 sm:mt-0 pt-10 sm:pt-0 flex items-center justify-center overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
+        <div className="absolute -top-4 -left-4 w-72 h-72 bg-purple-300 dark:bg-purple-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-300 dark:bg-yellow-500 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 dark:bg-pink-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
-          <h1 ref={textRef} className="text-5xl md:text-7xl font-luckiest text-gray-900 mb-6 leading-tight">
-            <div className="block">
+          <h1 ref={textRef} className="text-5xl md:text-7xl font-luckiest text-gray-900 dark:text-white mb-6 leading-tight">
+            <div className="block whitespace-nowrap">
               {renderAnimatedText(text1)}
             </div>
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent whitespace-nowrap">
               {renderAnimatedText(text2, text1.length)}
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Empowering individuals with self-confidence, mental well-being, and life skills
             through leadership, communication, and resilience.
           </p>
@@ -93,8 +93,8 @@ const Hero = () => {
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" size={20} />
             </button>
             
-            <button className="group flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors duration-200">
-              <div className="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
+            <button className="group flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+              <div className="w-12 h-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
                 <Play size={20} className="ml-1" />
               </div>
               <span className="text-lg font-medium">Watch Success Stories</span>
@@ -104,20 +104,20 @@ const Hero = () => {
           {/* Stats */}
           <div className="pb-10 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-2xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">40+</div>
-              <div className="text-gray-600">Selected in Defence Forces</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white">40+</div>
+              <div className="text-gray-600 dark:text-gray-400">Selected in Defence Forces</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">450+</div>
-              <div className="text-gray-600">Community Members</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white">450+</div>
+              <div className="text-gray-600 dark:text-gray-400">Community Members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">100+</div>
-              <div className="text-gray-600">Tech Club Members</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white">100+</div>
+              <div className="text-gray-600 dark:text-gray-400">Tech Club Members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">200+</div>
-              <div className="text-gray-600">Adventure Club Members</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white">200+</div>
+              <div className="text-gray-600 dark:text-gray-400">Adventure Club Members</div>
             </div>
           </div>
         </div>
