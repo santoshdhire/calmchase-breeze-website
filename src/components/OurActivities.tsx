@@ -63,11 +63,12 @@ const OurActivities = () => {
   };
 
   return (
-    <section className="py-12 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section className="py-16 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -91,24 +92,23 @@ const OurActivities = () => {
           {/* Left scroll button */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-12 w-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-14 w-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20 group"
           >
-            <ChevronLeft className="text-white" size={24} />
+            <ChevronLeft className="text-white group-hover:text-blue-300 transition-colors" size={28} />
           </button>
           
           {/* Right scroll button */}
           <button 
             onClick={scrollRight}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-12 w-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-14 w-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20 group"
           >
-            <ChevronRight className="text-white" size={24} />
+            <ChevronRight className="text-white group-hover:text-blue-300 transition-colors" size={28} />
           </button>
           
           {/* Scrollable container */}
           <div 
             ref={containerRef}
-            className="flex overflow-x-auto hide-scrollbar py-8 px-8 -mx-8 snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex overflow-x-auto py-8 px-8 -mx-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {activities.map((activity, index) => (
               <motion.div
@@ -116,10 +116,10 @@ const OurActivities = () => {
                 initial={{ opacity: 0, scale: 0.8, y: 50 }}
                 animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }}
                 transition={{ duration: 0.6, delay: 0.1 * index, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="min-w-[350px] md:min-w-[400px] snap-center px-4"
+                className="min-w-[350px] md:min-w-[420px] snap-center px-4"
               >
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden shadow-2xl h-full transform hover:scale-105 transition-all duration-500 border border-white/10 group">
-                  <div className="h-56 overflow-hidden relative">
+                <div className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl h-full transform hover:scale-105 transition-all duration-500 border border-white/10 group hover:border-white/20">
+                  <div className="h-64 overflow-hidden relative">
                     <img 
                       src={activity.image} 
                       alt={activity.title} 
@@ -128,31 +128,31 @@ const OurActivities = () => {
                     <div className={`absolute inset-0 bg-gradient-to-r ${activity.color} opacity-60 group-hover:opacity-40 transition-opacity duration-300`}></div>
                     
                     {/* Floating icon */}
-                    <div className="absolute top-4 right-4">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${activity.color} rounded-xl flex items-center justify-center backdrop-blur-sm bg-white/20 border border-white/30`}>
-                        <activity.icon className="text-white" size={24} />
+                    <div className="absolute top-6 right-6">
+                      <div className={`w-14 h-14 bg-gradient-to-r ${activity.color} rounded-2xl flex items-center justify-center backdrop-blur-sm bg-white/20 border border-white/30 shadow-xl`}>
+                        <activity.icon className="text-white drop-shadow-lg" size={28} />
                       </div>
                     </div>
 
                     {/* Stats badge */}
-                    <div className="absolute bottom-4 left-4">
-                      <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/30">
+                    <div className="absolute bottom-6 left-6">
+                      <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/30 shadow-lg">
                         {activity.stats}
                       </span>
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300">
                       {activity.title}
                     </h3>
-                    <p className="text-gray-300 mb-4 leading-relaxed">
+                    <p className="text-gray-300 mb-6 leading-relaxed text-base">
                       {activity.description}
                     </p>
                     
-                    <button className={`inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-gradient-to-r ${activity.color} text-white hover:shadow-lg transition-all duration-300 hover:scale-105`}>
+                    <button className={`inline-flex items-center text-sm font-semibold px-6 py-3 rounded-xl bg-gradient-to-r ${activity.color} text-white hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20`}>
                       Learn more
-                      <ChevronRight size={16} className="ml-1" />
+                      <ChevronRight size={18} className="ml-2" />
                     </button>
                   </div>
                 </div>
@@ -161,12 +161,6 @@ const OurActivities = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };
