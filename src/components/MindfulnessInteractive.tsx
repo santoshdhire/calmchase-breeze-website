@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 
@@ -120,7 +121,7 @@ const MindfulnessInteractive = () => {
   };
   
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-12 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 -z-10"></div>
       
@@ -157,7 +158,7 @@ const MindfulnessInteractive = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Take a <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mindful Moment</span>
@@ -169,24 +170,24 @@ const MindfulnessInteractive = () => {
         
         <div className="flex flex-col items-center justify-center max-w-4xl mx-auto">
           {/* Breathing exercise */}
-          <div className="relative mb-10 flex flex-col items-center">
+          <div className="relative mb-8 flex flex-col items-center">
             {/* Breathing circle */}
-            <div className="mb-10 relative">
+            <div className="mb-8 relative">
               <motion.div 
                 animate={circleAnimation}
-                className={`w-64 h-64 rounded-full bg-gradient-to-r ${breathingPattern[currentStep].color} shadow-lg flex items-center justify-center`}
+                className={`w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-r ${breathingPattern[currentStep].color} shadow-lg flex items-center justify-center`}
               >
                 <motion.div 
                   animate={textAnimation}
                   className="text-center text-white"
                 >
-                  <div className="text-3xl font-bold mb-2">{breathingPattern[currentStep].instruction}</div>
+                  <div className="text-2xl md:text-3xl font-bold mb-2">{breathingPattern[currentStep].instruction}</div>
                   <div className="text-lg opacity-90">{secondsLeft}s</div>
                 </motion.div>
               </motion.div>
               
               {/* Progress circles */}
-              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {breathingPattern.map((_, index) => (
                   <div
                     key={index}
@@ -203,7 +204,7 @@ const MindfulnessInteractive = () => {
             {/* Control button */}
             <button
               onClick={toggleActive}
-              className={`px-6 py-3 mt-4 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 mt-2 rounded-full font-medium transition-all duration-300 ${
                 isActive 
                   ? "bg-red-500 hover:bg-red-600 text-white"
                   : "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
@@ -220,7 +221,7 @@ const MindfulnessInteractive = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="mt-10 max-w-xl text-center"
+                className="mt-6 max-w-xl text-center"
               >
                 <p className="text-lg text-gray-700 italic">"{quote}"</p>
               </motion.div>
@@ -232,7 +233,7 @@ const MindfulnessInteractive = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="mt-8 text-center"
+                className="mt-4 text-center"
               >
                 <p className="text-sm text-gray-600">
                   <span className="font-bold text-purple-600">{completedCycles}</span> {completedCycles === 1 ? 'cycle' : 'cycles'} completed
@@ -247,7 +248,7 @@ const MindfulnessInteractive = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-0"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-0"
           >
             {[
               {
@@ -272,13 +273,13 @@ const MindfulnessInteractive = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300"
               >
                 <div className='flex justify-start items-center gap-2'>
-                <div className="text-4xl ">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 ">{benefit.title}</h3>
+                <div className="text-3xl">{benefit.icon}</div>
+                <h3 className="text-lg font-bold text-gray-900">{benefit.title}</h3>
                 </div>
-                <p className="text-gray-600">{benefit.description}</p>
+                <p className="text-gray-600 text-sm">{benefit.description}</p>
               </motion.div>
             ))}
           </motion.div>
