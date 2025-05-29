@@ -1,287 +1,139 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-
-type BreathStep = {
-  instruction: string;
-  duration: number; // in seconds
-  color: string;
-};
-
-const breathingPattern: BreathStep[] = [
-  { instruction: "Inhale", duration: 4, color: "from-blue-400 to-cyan-300" },
-  { instruction: "Hold", duration: 7, color: "from-purple-400 to-pink-300" },
-  { instruction: "Exhale", duration: 8, color: "from-green-400 to-emerald-300" },
-];
-
-const quotes = [
-  "Your mind will answer most questions if you learn to relax and wait for the answer.",
-  "The greatest weapon against stress is our ability to choose one thought over another.",
-  "Within you lies a calm that never leaves.",
-  "Mindfulness isn't difficult. We just need to remember to do it.",
-  "Peace comes from within. Do not seek it without.",
-  "Wherever you go, there you are.",
-  "The best way to capture moments is to pay attention.",
-  "Be present above all else.",
-  "Respond, don't react.",
-  "Every moment is a fresh beginning."
-];
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 
 const MindfulnessInteractive = () => {
   const [isActive, setIsActive] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(breathingPattern[0].duration);
-  const [quote, setQuote] = useState("");
-  const [completedCycles, setCompletedCycles] = useState(0);
-  
-  const circleAnimation = useAnimation();
-  const textAnimation = useAnimation();
-  
-  // Randomize quote selection
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [selectedDuration, setSelectedDuration] = useState(60);
+  const [breathPhase, setBreathPhase] = useState<'inhale' | 'hold' | 'exhale'>('inhale');
+
+  const durations = [30, 60, 120, 300];
+
   useEffect(() => {
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-  }, []);
-  
-  // Progress to next step in breathing cycle
-  const progressStep = useCallback(() => {
-    const nextStep = (currentStep + 1) % breathingPattern.length;
-    setCurrentStep(nextStep);
-    setSecondsLeft(breathingPattern[nextStep].duration);
+    let interval: NodeJS.Timeout;
     
-    // If we've completed a full cycle
-    if (nextStep === 0) {
-      setCompletedCycles(prevCycles => prevCycles + 1);
-      setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+    if (isActive && timeLeft > 0) {
+      interval = setInterval(() => {
+        setTimeLeft(time => time - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      setIsActive(false);
     }
-  }, [currentStep]);
-  
-  // Handle countdown and animations
+
+    return () => clearInterval(interval);
+  }, [isActive, timeLeft]);
+
   useEffect(() => {
-    if (!isActive) return;
+    let breathInterval: NodeJS.Timeout;
     
-    // Animation for current step
-    const currentBreathStep = breathingPattern[currentStep];
-    
-    switch (currentBreathStep.instruction) {
-      case "Inhale":
-        circleAnimation.start({
-          scale: 1.3,
-          transition: { duration: currentBreathStep.duration, ease: "easeInOut" }
-        });
-        break;
-      case "Hold":
-        // Keep circle expanded
-        break;
-      case "Exhale":
-        circleAnimation.start({
-          scale: 1,
-          transition: { duration: currentBreathStep.duration, ease: "easeInOut" }
-        });
-        break;
-    }
-    
-    // Text fade in animation
-    textAnimation.start({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    });
-    
-    // Countdown timer
-    const timer = setInterval(() => {
-      setSecondsLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          // After animation completes, fade out text before changing it
-          textAnimation.start({
-            opacity: 0,
-            y: 10,
-            transition: { duration: 0.5 }
-          }).then(() => {
-            progressStep();
-          });
-          return prev - 1;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, [isActive, currentStep, circleAnimation, textAnimation, progressStep]);
-  
-  // Toggle breathing exercise
-  const toggleActive = () => {
     if (isActive) {
-      // Reset when stopping
-      setCurrentStep(0);
-      setSecondsLeft(breathingPattern[0].duration);
-      circleAnimation.start({ scale: 1 });
+      breathInterval = setInterval(() => {
+        setBreathPhase(phase => {
+          switch (phase) {
+            case 'inhale': return 'hold';
+            case 'hold': return 'exhale';
+            case 'exhale': return 'inhale';
+            default: return 'inhale';
+          }
+        });
+      }, 4000);
     }
+
+    return () => clearInterval(breathInterval);
+  }, [isActive]);
+
+  const toggleTimer = () => {
     setIsActive(!isActive);
   };
-  
+
+  const resetTimer = () => {
+    setIsActive(false);
+    setTimeLeft(selectedDuration);
+    setBreathPhase('inhale');
+  };
+
+  const selectDuration = (duration: number) => {
+    setSelectedDuration(duration);
+    setTimeLeft(duration);
+    setIsActive(false);
+    setBreathPhase('inhale');
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getBreathInstruction = () => {
+    switch (breathPhase) {
+      case 'inhale': return 'Breathe In';
+      case 'hold': return 'Hold';
+      case 'exhale': return 'Breathe Out';
+    }
+  };
+
   return (
-    <section className="py-8 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 -z-10"></div>
-      
-      {/* Animated circles in background */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.2 + 0.05
-            }}
-            animate={{
-              x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-              y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-            }}
-            transition={{
-              duration: Math.random() * 60 + 60,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+    <section className="py-8 bg-gradient-to-br from-green-50 to-teal-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Take a <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mindful Moment</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono">
+            Take a <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Mindful Moment</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Practice a guided breathing exercise to calm your mind and reduce stress.
+          <p className="text-lg text-gray-600">
+            Practice breathing exercises to center yourself and find inner peace.
           </p>
         </motion.div>
-        
-        <div className="flex flex-col items-center justify-center max-w-4xl mx-auto">
-          {/* Breathing exercise */}
-          <div className="relative mb-6 flex flex-col items-center">
-            {/* Breathing circle */}
-            <div className="mb-6 relative">
-              <motion.div 
-                animate={circleAnimation}
-                className={`w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-r ${breathingPattern[currentStep].color} shadow-lg flex items-center justify-center`}
-              >
-                <motion.div 
-                  animate={textAnimation}
-                  className="text-center text-white"
-                >
-                  <div className="text-xl md:text-2xl font-bold mb-2">{breathingPattern[currentStep].instruction}</div>
-                  <div className="text-lg opacity-90">{secondsLeft}s</div>
-                </motion.div>
-              </motion.div>
-              
-              {/* Progress circles */}
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {breathingPattern.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                      index === currentStep
-                        ? "bg-blue-500"
-                        : "bg-gray-300"
-                    }`}
-                  ></div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Control button */}
-            <button
-              onClick={toggleActive}
-              className={`px-6 py-3 mt-2 rounded-full font-medium transition-all duration-300 ${
-                isActive 
-                  ? "bg-red-500 hover:bg-red-600 text-white"
-                  : "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
-              }`}
-            >
-              {isActive ? "Stop" : "Start Breathing Exercise"}
-            </button>
-            
-            {/* Mindfulness quote */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={quote}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="mt-4 max-w-xl text-center"
-              >
-                <p className="text-lg text-gray-700 italic">"{quote}"</p>
-              </motion.div>
-            </AnimatePresence>
-            
-            {/* Progress indicator */}
-            {completedCycles > 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="mt-3 text-center"
-              >
-                <p className="text-sm text-gray-600">
-                  <span className="font-bold text-purple-600">{completedCycles}</span> {completedCycles === 1 ? 'cycle' : 'cycles'} completed
-                </p>
-              </motion.div>
-            )}
+
+        <div className="bg-white rounded-2xl shadow-xl p-6">
+          {/* Timer Display */}
+          <div className="text-center mb-6">
+            <div className="text-4xl font-semibold text-gray-800">{formatTime(timeLeft)}</div>
+            <p className="text-lg text-blue-600 font-medium">{getBreathInstruction()}</p>
           </div>
-          
-          {/* Benefits cards */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-0"
-          >
-            {[
-              {
-                title: "Reduce Stress",
-                description: "Breathing exercises activate your parasympathetic nervous system, reducing stress hormones.",
-                icon: "💆"
-              },
-              {
-                title: "Improve Focus",
-                description: "Regular mindfulness practice enhances attention and decision-making abilities.",
-                icon: "🧠"
-              },
-              {
-                title: "Better Sleep",
-                description: "Calming your mind before bed leads to improved sleep quality and duration.",
-                icon: "😴"
-              }
-            ].map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300"
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <button
+              onClick={toggleTimer}
+              className="p-3 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200"
+            >
+              {isActive ? <Pause size={24} className="text-blue-700" /> : <Play size={24} className="text-blue-700" />}
+            </button>
+            <button
+              onClick={resetTimer}
+              className="p-3 rounded-full bg-yellow-100 hover:bg-yellow-200 transition-colors duration-200"
+            >
+              <RotateCcw size={24} className="text-yellow-700" />
+            </button>
+            <button className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+              <Volume2 size={24} className="text-gray-700" />
+            </button>
+          </div>
+
+          {/* Duration Options */}
+          <div className="flex items-center justify-center gap-3">
+            {durations.map(duration => (
+              <button
+                key={duration}
+                onClick={() => selectDuration(duration)}
+                className={`px-4 py-2 rounded-full text-sm font-medium ${
+                  selectedDuration === duration
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                } transition-colors duration-200`}
               >
-                <div className='flex justify-start items-center gap-2'>
-                <div className="text-3xl">{benefit.icon}</div>
-                <h3 className="text-lg font-bold text-gray-900">{benefit.title}</h3>
-                </div>
-                <p className="text-gray-600 text-sm">{benefit.description}</p>
-              </motion.div>
+                {duration / 60} min
+              </button>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

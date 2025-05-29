@@ -10,42 +10,42 @@ const Features = () => {
       title: "SSB Preparation Program",
       description: "Comprehensive training program with excellent results for candidates aspiring to join the defence forces.",
       color: "from-blue-500 to-cyan-500",
-      direction: { x: -100, y: -100 } // top-left
+      direction: { x: -300, y: -300 } // top-left
     },
     {
       icon: Brain,
       title: "Digital Detox Programs",
       description: "7-day and 21-day programs designed to help individuals break free from digital addiction and regain focus.",
       color: "from-pink-500 to-rose-500",
-      direction: { x: 100, y: -100 } // top-right
+      direction: { x: 300, y: -300 } // top-right
     },
     {
       icon: Shield,
       title: "Personality Development",
       description: "Holistic programs focused on leadership, communication, social intelligence, and decision-making skills.",
       color: "from-purple-500 to-indigo-500",
-      direction: { x: -100, y: 100 } // bottom-left
+      direction: { x: -300, y: 300 } // bottom-left
     },
     {
       icon: Zap,
       title: "Leadership Training",
       description: "Learn effective leadership strategies to inspire and guide teams toward success.",
       color: "from-yellow-500 to-orange-500",
-      direction: { x: 100, y: 100 } // bottom-right
+      direction: { x: 300, y: 300 } // bottom-right
     },
     {
       icon: Hammer,
       title: "Resilience Building",
       description: "Develop mental fortitude to overcome obstacles and thrive under pressure.",
       color: "from-green-500 to-emerald-500",
-      direction: { x: 0, y: -150 } // top
+      direction: { x: 0, y: -400 } // top
     },
     {
       icon: Users,
       title: "Community Support",
       description: "Join a thriving community of like-minded individuals on their self-improvement journey.",
       color: "from-violet-500 to-purple-500",
-      direction: { x: 0, y: 150 } // bottom
+      direction: { x: 0, y: 400 } // bottom
     }
   ];
 
@@ -76,23 +76,29 @@ const Features = () => {
                 opacity: 0, 
                 x: feature.direction.x, 
                 y: feature.direction.y,
-                scale: 0.8
+                scale: 0.5,
+                rotate: 15
               }}
               whileInView={{ 
                 opacity: 1, 
                 x: 0, 
                 y: 0,
-                scale: 1
+                scale: 1,
+                rotate: 0
               }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 0.8, 
-                delay: index * 0.1,
-                ease: "easeOut"
+                duration: 1.2, 
+                delay: index * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                type: "spring",
+                stiffness: 100,
+                damping: 15
               }}
               whileHover={{ 
                 scale: 1.05,
-                y: -10
+                y: -10,
+                transition: { duration: 0.3, ease: "easeOut" }
               }}
               className="group p-6 bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden relative"
             >
