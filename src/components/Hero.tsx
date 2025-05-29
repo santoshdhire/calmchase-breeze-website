@@ -73,11 +73,11 @@ const Hero = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
-          <h1 ref={textRef} className="text-4xl sm:text-5xl md:text-7xl font-luckiest font-bold text-gray-900 mb-6 leading-tight">
-            <div className="block whitespace-nowrap">
+          <h1 ref={textRef} className="text-5xl md:text-7xl font-luckiest text-gray-900 mb-6 leading-tight">
+            <div className="block">
               {renderAnimatedText(text1)}
             </div>
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent whitespace-nowrap">
+            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
               {renderAnimatedText(text2, text1.length)}
             </span>
           </h1>

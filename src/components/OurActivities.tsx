@@ -1,48 +1,38 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Sparkles, Zap, Mountain, Users, Target } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 const activities = [
   {
     title: "SSB Interview Preparation",
     description: "Comprehensive training for Services Selection Board interviews with expert mentoring.",
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-blue-500 to-indigo-600",
-    icon: Target,
-    stats: "40+ Selected"
+    color: "from-blue-500 to-indigo-600"
   },
   {
     title: "21-Day Digital Detox Retreat",
     description: "Immersive program to break technology addiction and reconnect with self and nature.",
     image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80",
-    color: "from-purple-500 to-pink-600",
-    icon: Sparkles,
-    stats: "95% Success Rate"
+    color: "from-purple-500 to-pink-600"
   },
   {
     title: "Adventure Club Expeditions",
     description: "Character-building adventures including trekking, rock climbing and outdoor survival skills.",
     image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80",
-    color: "from-amber-500 to-orange-600",
-    icon: Mountain,
-    stats: "200+ Members"
+    color: "from-amber-500 to-orange-600"
   },
   {
     title: "Leadership Development Workshops",
     description: "Interactive workshops to develop critical leadership skills and strategic thinking.",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-emerald-500 to-teal-600",
-    icon: Zap,
-    stats: "50+ Leaders Trained"
+    color: "from-emerald-500 to-teal-600"
   },
   {
     title: "Personality Development Sessions",
     description: "Structured programs for building confidence, communication skills and emotional intelligence.",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-rose-500 to-red-600",
-    icon: Users,
-    stats: "450+ Transformed"
+    color: "from-rose-500 to-red-600"
   }
 ];
 
@@ -52,38 +42,32 @@ const OurActivities = () => {
   
   const scrollLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+      containerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     }
   };
   
   const scrollRight = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+      containerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
   };
 
   return (
-    <section className="py-16 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-10 overflow-hidden bg-gradient-to-r from-gray-50 to-blue-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
+          ref={containerRef}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            Our <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Activities</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Activities</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Transformative programs designed to unlock your full potential and create lasting impact.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Transformative programs designed to develop every aspect of your personality and potential.
           </p>
         </motion.div>
         
@@ -92,67 +76,49 @@ const OurActivities = () => {
           {/* Left scroll button */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-14 w-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20 group"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm hover:bg-white h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
           >
-            <ChevronLeft className="text-white group-hover:text-blue-300 transition-colors" size={28} />
+            <ChevronLeft className="text-gray-700" />
           </button>
           
           {/* Right scroll button */}
           <button 
             onClick={scrollRight}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-lg hover:bg-white/20 h-14 w-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border border-white/20 group"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm hover:bg-white h-10 w-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
           >
-            <ChevronRight className="text-white group-hover:text-blue-300 transition-colors" size={28} />
+            <ChevronRight className="text-gray-700" />
           </button>
           
           {/* Scrollable container */}
           <div 
             ref={containerRef}
-            className="flex overflow-x-auto py-8 px-8 -mx-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex overflow-x-auto hide-scrollbar py-8 px-5 -mx-5 snap-x snap-mandatory"
           >
             {activities.map((activity, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }}
-                transition={{ duration: 0.6, delay: 0.1 * index, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="min-w-[350px] md:min-w-[420px] snap-center px-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                className="min-w-[300px] md:min-w-[400px] snap-center px-5"
               >
-                <div className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl h-full transform hover:scale-105 transition-all duration-500 border border-white/10 group hover:border-white/20">
-                  <div className="h-64 overflow-hidden relative">
+                <div className="bg-white rounded-xl overflow-hidden shadow-xl h-full transform hover:-translate-y-2 transition-all duration-300">
+                  <div className="h-48 overflow-hidden relative">
                     <img 
                       src={activity.image} 
                       alt={activity.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${activity.color} opacity-60 group-hover:opacity-40 transition-opacity duration-300`}></div>
-                    
-                    {/* Floating icon */}
-                    <div className="absolute top-6 right-6">
-                      <div className={`w-14 h-14 bg-gradient-to-r ${activity.color} rounded-2xl flex items-center justify-center backdrop-blur-sm bg-white/20 border border-white/30 shadow-xl`}>
-                        <activity.icon className="text-white drop-shadow-lg" size={28} />
-                      </div>
-                    </div>
-
-                    {/* Stats badge */}
-                    <div className="absolute bottom-6 left-6">
-                      <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/30 shadow-lg">
-                        {activity.stats}
-                      </span>
-                    </div>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${activity.color} opacity-40`}></div>
                   </div>
                   
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300">
-                      {activity.title}
-                    </h3>
-                    <p className="text-gray-300 mb-6 leading-relaxed text-base">
-                      {activity.description}
-                    </p>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{activity.title}</h3>
+                    <p className="text-gray-600 mb-4">{activity.description}</p>
                     
-                    <button className={`inline-flex items-center text-sm font-semibold px-6 py-3 rounded-xl bg-gradient-to-r ${activity.color} text-white hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20`}>
+                    <button className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${activity.color} bg-clip-text text-transparent`}>
                       Learn more
-                      <ChevronRight size={18} className="ml-2" />
+                      <ChevronRight size={16} className={`ml-1 text-transparent bg-gradient-to-r ${activity.color} bg-clip-text`} />
                     </button>
                   </div>
                 </div>

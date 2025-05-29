@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, RotateCcw, Trophy } from 'lucide-react';
 
@@ -55,21 +55,15 @@ const InteractiveQuizCompact = () => {
     }
   };
 
-  useEffect(() => {
-    if (showResult) {
-      const timer = setTimeout(() => {
-        if (currentQuestion < questions.length - 1) {
-          setCurrentQuestion(currentQuestion + 1);
-          setSelectedAnswer(null);
-          setShowResult(false);
-        } else {
-          setQuizCompleted(true);
-        }
-      }, 2500);
-
-      return () => clearTimeout(timer);
+  const nextQuestion = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setShowResult(false);
+    } else {
+      setQuizCompleted(true);
     }
-  }, [showResult, currentQuestion]);
+  };
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
@@ -88,7 +82,7 @@ const InteractiveQuizCompact = () => {
 
   if (quizCompleted) {
     return (
-      <section className="py-8 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -116,7 +110,7 @@ const InteractiveQuizCompact = () => {
   }
 
   return (
-    <section className="py-8 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section className="py-12 bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -125,7 +119,7 @@ const InteractiveQuizCompact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Test Your <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Knowledge</span>
           </h2>
           <p className="text-lg text-gray-600">
@@ -210,6 +204,23 @@ const InteractiveQuizCompact = () => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Next button */}
+          {showResult && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <button
+                onClick={nextQuestion}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200"
+              >
+                {currentQuestion < questions.length - 1 ? 'Next Question' : 'View Results'}
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
