@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import InteractiveQuiz from '../components/InteractiveQuiz';
+import InteractiveQuizCompact from '../components/InteractiveQuizCompact';
 import OurActivities from '../components/OurActivities';
 import OurPride from '../components/OurPride';
 import MindfulnessInteractive from '../components/MindfulnessInteractive';
@@ -18,7 +18,7 @@ const Index = () => {
       <Hero />
       <Features />
       <OurActivities />
-      <InteractiveQuiz />
+      <InteractiveQuizCompact />
       <OurPride />
       <MindfulnessInteractive />
       <Testimonials />
