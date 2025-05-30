@@ -8,7 +8,6 @@ const activities = [
     title: "SSB Interview Preparation",
     description: "Comprehensive training for Services Selection Board interviews with expert mentoring and mock sessions.",
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-blue-500 to-indigo-600",
     icon: Target,
     stats: "85% Success Rate",
     duration: "6 Weeks"
@@ -17,7 +16,6 @@ const activities = [
     title: "21-Day Digital Detox Retreat",
     description: "Immersive program to break technology addiction and reconnect with self and nature through mindful activities.",
     image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80",
-    color: "from-purple-500 to-pink-600",
     icon: Brain,
     stats: "200+ Participants",
     duration: "21 Days"
@@ -26,7 +24,6 @@ const activities = [
     title: "Adventure Club Expeditions",
     description: "Character-building adventures including trekking, rock climbing and outdoor survival skills training.",
     image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80",
-    color: "from-amber-500 to-orange-600",
     icon: Mountain,
     stats: "50+ Expeditions",
     duration: "Weekend"
@@ -35,7 +32,6 @@ const activities = [
     title: "Leadership Development Workshops",
     description: "Interactive workshops to develop critical leadership skills and strategic thinking for future leaders.",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-emerald-500 to-teal-600",
     icon: Users,
     stats: "300+ Leaders",
     duration: "4 Weeks"
@@ -44,7 +40,6 @@ const activities = [
     title: "Personality Development Sessions",
     description: "Structured programs for building confidence, communication skills and emotional intelligence.",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    color: "from-rose-500 to-red-600",
     icon: Zap,
     stats: "95% Satisfaction",
     duration: "8 Weeks"
@@ -128,15 +123,15 @@ const OurActivities = () => {
                 className="min-w-[320px] md:min-w-[380px] snap-center"
               >
                 <div className="relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl h-[480px] group">
-                  {/* Background Image with Overlay */}
+                  {/* Background Image without color overlay */}
                   <div className="absolute inset-0">
                     <img 
                       src={activity.image} 
                       alt={activity.title} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${activity.color} opacity-80`}></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    {/* Only subtle dark overlay at bottom for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                   </div>
                   
                   {/* Content Overlay */}
@@ -163,8 +158,8 @@ const OurActivities = () => {
                     
                     {/* Bottom Section - Title and Description */}
                     <div>
-                      <h3 className="text-2xl font-bold mb-3 leading-tight">{activity.title}</h3>
-                      <p className="text-white/90 mb-6 leading-relaxed">{activity.description}</p>
+                      <h3 className="text-2xl font-bold mb-3 leading-tight drop-shadow-lg">{activity.title}</h3>
+                      <p className="text-white/95 mb-6 leading-relaxed drop-shadow-md">{activity.description}</p>
                       
                       <motion.button 
                         className="group/btn bg-white/20 backdrop-blur-md hover:bg-white/30 border border-white/30 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300"

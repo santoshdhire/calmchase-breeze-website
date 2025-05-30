@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -20,63 +21,54 @@ const Gallery = () => {
       category: "SSB Programs",
       title: "Group Task Activity",
       description: "Candidates working together to solve complex problems during SSB preparation.",
-      color: "from-blue-500 to-indigo-600",
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
     },
     {
       category: "Digital Detox",
       title: "Meditation Session",
       description: "Participants practicing mindfulness during the 21-day digital detox program.",
-      color: "from-purple-500 to-pink-600",
       image: "https://images.unsplash.com/photo-1551818905-29c07d4802d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
     },
     {
       category: "Personality Development",
       title: "Public Speaking Workshop",
       description: "Students developing communication skills through public speaking exercises.",
-      color: "from-green-500 to-emerald-600",
       image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Adventure Club",
       title: "Mountain Trekking",
       description: "Adventure club members building resilience through challenging treks.",
-      color: "from-orange-500 to-red-600",
       image: "https://images.unsplash.com/photo-1501554728187-ce583db33af7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
     },
     {
       category: "SSB Programs",
       title: "Interview Preparation",
       description: "Mock interview sessions to prepare candidates for SSB interviews.",
-      color: "from-blue-600 to-cyan-500",
       image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Digital Detox",
       title: "Nature Connect",
       description: "Digital detox participants reconnecting with nature through outdoor activities.",
-      color: "from-pink-500 to-purple-600",
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80"
     },
     {
       category: "Personality Development",
       title: "Team Building",
       description: "Interactive team building exercises to develop leadership skills.",
-      color: "from-teal-500 to-green-600",
       image: "https://images.unsplash.com/photo-1561489413-985b06da5bee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     },
     {
       category: "Adventure Club",
       title: "Rock Climbing",
       description: "Building confidence through challenging physical activities.",
-      color: "from-red-500 to-orange-600",
       image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1303&q=80"
     },
     {
       category: "SSB Programs",
       title: "Graduation Ceremony",
       description: "Successful candidates celebrating their selection into defense forces.",
-      color: "from-indigo-500 to-blue-600",
       image: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
     }
   ];
@@ -180,43 +172,21 @@ const Gallery = () => {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   
-                  <div className="absolute inset-0 bg-gradient-to-br opacity-70 transition-opacity duration-300 group-hover:opacity-80" style={{
-                    backgroundImage: `linear-gradient(to bottom right, ${item.color.includes('from-blue-500') ? '#3b82f6' : 
-                      item.color.includes('from-purple-500') ? '#a855f7' :
-                      item.color.includes('from-green-500') ? '#22c55e' :
-                      item.color.includes('from-orange-500') ? '#f97316' :
-                      item.color.includes('from-blue-600') ? '#2563eb' :
-                      item.color.includes('from-pink-500') ? '#ec4899' :
-                      item.color.includes('from-teal-500') ? '#14b8a6' :
-                      item.color.includes('from-red-500') ? '#ef4444' :
-                      item.color.includes('from-indigo-500') ? '#6366f1' : '#3b82f6'
-                    }, ${
-                      item.color.includes('to-indigo-600') ? '#4f46e5' : 
-                      item.color.includes('to-pink-600') ? '#db2777' :
-                      item.color.includes('to-emerald-600') ? '#059669' :
-                      item.color.includes('to-red-600') ? '#dc2626' :
-                      item.color.includes('to-cyan-500') ? '#06b6d4' :
-                      item.color.includes('to-purple-600') ? '#9333ea' :
-                      item.color.includes('to-green-600') ? '#16a34a' :
-                      item.color.includes('to-orange-600') ? '#ea580c' :
-                      item.color.includes('to-blue-600') ? '#2563eb' : '#4f46e5'
-                    })`
-                  }}></div>
-                  
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                  {/* Only subtle dark overlay on hover for text visibility */}
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
                   
                   {/* Content Overlay */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium w-fit mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                    <span className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-gray-900 dark:text-white px-3 py-1 rounded-full text-sm font-medium w-fit mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
                       {item.category}
                     </span>
-                    <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-150">{item.title}</h3>
-                    <p className="text-white/90 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-200">{item.description}</p>
+                    <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-150 drop-shadow-lg">{item.title}</h3>
+                    <p className="text-white/95 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-200 drop-shadow-md">{item.description}</p>
                   </div>
                   
                   {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-12 h-12 rounded-full border-2 border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  <div className="absolute bottom-4 left-4 w-20 h-1 bg-white/50 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300"></div>
+                  <div className="absolute top-4 right-4 w-12 h-12 rounded-full border-2 border-white/50 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="absolute bottom-4 left-4 w-20 h-1 bg-white/70 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300"></div>
                 </div>
               </motion.div>
             ))}
