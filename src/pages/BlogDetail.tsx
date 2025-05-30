@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -121,10 +122,10 @@ const BlogDetail = () => {
   // If no post is found, redirect to the blog page
   if (!post) {
     return (
-      <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Post not found</h2>
-          <p className="text-gray-600 mb-6">The blog post you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Post not found</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">The blog post you're looking for doesn't exist.</p>
           <Link 
             to="/blog" 
             className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg transition-all duration-200"
@@ -142,7 +143,7 @@ const BlogDetail = () => {
     .slice(0, 3);
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Navigation />
       
       <section className="pt-36 pb-16">
@@ -155,7 +156,7 @@ const BlogDetail = () => {
           >
             <button 
               onClick={() => navigate('/blog')}
-              className="flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-6 group"
+              className="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors mb-6 group"
             >
               <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition-transform" />
               Back to All Articles
@@ -172,11 +173,11 @@ const BlogDetail = () => {
               {post.category}
             </span>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               {post.title}
             </h1>
             
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-10">
+            <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-300 mb-10">
               <div className="flex items-center gap-2">
                 <Calendar size={18} className="opacity-80" />
                 <span>{post.date}</span>
@@ -214,16 +215,16 @@ const BlogDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-12 bg-white/80 backdrop-blur-sm rounded-xl p-6 flex items-center gap-4 shadow-md"
+            className="mb-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 flex items-center gap-4 shadow-md"
           >
             <img 
               src={post.authorImage} 
               alt={post.author} 
-              className="w-16 h-16 rounded-full object-cover border-2 border-purple-200" 
+              className="w-16 h-16 rounded-full object-cover border-2 border-purple-200 dark:border-purple-400" 
             />
             <div>
-              <h3 className="font-bold text-gray-900">{post.author}</h3>
-              <p className="text-gray-600 text-sm">{post.authorRole}</p>
+              <h3 className="font-bold text-gray-900 dark:text-white">{post.author}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">{post.authorRole}</p>
             </div>
           </motion.div>
           
@@ -232,7 +233,7 @@ const BlogDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="prose prose-lg max-w-none"
+            className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300"
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></motion.div>
           
@@ -247,7 +248,7 @@ const BlogDetail = () => {
               {post.tags && post.tags.map((tag, index) => (
                 <span 
                   key={index} 
-                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full cursor-pointer transition-colors"
+                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm rounded-full cursor-pointer transition-colors"
                 >
                   #{tag}
                 </span>
@@ -260,24 +261,24 @@ const BlogDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex justify-between items-center border-t border-b border-gray-200 py-6 my-10"
+            className="flex justify-between items-center border-t border-b border-gray-200 dark:border-gray-700 py-6 my-10"
           >
             <div className="flex gap-6">
-              <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <button className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 <ThumbsUp size={20} />
                 <span>Like</span>
               </button>
-              <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <button className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 <MessageCircle size={20} />
                 <span>Comment</span>
               </button>
-              <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <button className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 <Bookmark size={20} />
                 <span>Save</span>
               </button>
             </div>
             
-            <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <button className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               <Share2 size={20} />
               <span>Share</span>
             </button>
@@ -291,7 +292,7 @@ const BlogDetail = () => {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="mt-16"
             >
-              <h3 className="text-2xl font-bold mb-6">Related Articles</h3>
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Related Articles</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost, index) => (
@@ -304,7 +305,7 @@ const BlogDetail = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
-                      className="bg-white rounded-xl overflow-hidden shadow hover:shadow-md transition-all duration-300"
+                      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow hover:shadow-md transition-all duration-300"
                     >
                       <div className="h-40 overflow-hidden">
                         <img 
@@ -315,11 +316,11 @@ const BlogDetail = () => {
                       </div>
                       
                       <div className="p-4">
-                        <span className="text-sm text-blue-600">{relatedPost.category}</span>
-                        <h4 className="font-bold text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        <span className="text-sm text-blue-600 dark:text-blue-400">{relatedPost.category}</span>
+                        <h4 className="font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {relatedPost.title}
                         </h4>
-                        <p className="text-sm text-gray-600">{relatedPost.readTime}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{relatedPost.readTime}</p>
                       </div>
                     </motion.div>
                   </Link>
