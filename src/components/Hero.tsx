@@ -164,6 +164,12 @@ const Hero = () => {
         {char === ' ' ? '\u00A0' : char}
       </span>
     ));
+  const renderTextBlack = (text: string) =>
+    text.split('').map((char, index) => (
+      <span key={index}>
+        {char === ' ' ? '\u00A0' : char}
+      </span>
+    ));
 
   // Reset letter index on each render
   letterIndex = 0;
@@ -193,7 +199,7 @@ const Hero = () => {
 
         <div className="text-center px-4">
           <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 leading-tight">
-            <div>{renderText(textMain)}</div>
+            <div className='text-black'>{renderTextBlack(textMain)}</div>
             <span className="block mt-2">{renderText(textSub)}</span>
           </h1>
         </div>
