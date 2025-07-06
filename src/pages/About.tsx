@@ -70,6 +70,24 @@ const About = () => {
     { icon: Star, number: "4.9★", label: "User Rating", color: "from-purple-400 to-pink-400" }
   ];
 
+  const inspirationalQuotes = [
+    {
+      quote: "Your journey to inner peace starts with a single breath.",
+      author: "— The CalmChase Philosophy",
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&h=500&fit=crop"
+    },
+    {
+      quote: "In stillness, we find our greatest strength.",
+      author: "— Ancient Wisdom, Modern Practice",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=500&fit=crop"
+    },
+    {
+      quote: "Every moment is a chance to begin again.",
+      author: "— CalmChase Community",
+      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=800&h=500&fit=crop"
+    }
+  ];
+
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-yellow-50 via-pink-50 to-cyan-50 overflow-hidden">
       <Navigation />
@@ -158,6 +176,168 @@ const About = () => {
             ))}
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* Inspirational Quotes with Group Photos - Apple Style */}
+      <section className="relative py-32 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-24"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-8xl font-black text-gray-800 mb-8">
+              Where <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">Magic</span> Happens
+            </h2>
+            <p className="text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Every story begins with a dream. Every journey starts with a single step. You are extraordinary. ✨
+            </p>
+          </motion.div>
+
+          {inspirationalQuotes.map((item, index) => (
+            <motion.div
+              key={index}
+              className={`flex ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-16 mb-32`}
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex-1">
+                <motion.div
+                  className="relative overflow-hidden rounded-3xl shadow-2xl"
+                  whileHover={{ scale: 1.02, rotate: 1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 z-10" />
+                  <img
+                    src={item.image}
+                    alt="Team collaboration"
+                    className="w-full h-96 object-cover"
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-20"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </motion.div>
+              </div>
+
+              <div className="flex-1 px-8">
+                <motion.div
+                  className="space-y-8"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative">
+                    <motion.div
+                      className="absolute -left-8 -top-4 text-8xl text-pink-200 font-black opacity-50"
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    >
+                      "
+                    </motion.div>
+                    <h3 className="text-5xl md:text-6xl font-light text-gray-800 leading-tight mb-8 relative z-10">
+                      {item.quote}
+                    </h3>
+                  </div>
+                  
+                  <motion.p 
+                    className="text-2xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {item.author}
+                  </motion.p>
+
+                  <motion.div
+                    className="flex space-x-4 pt-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    {[Heart, Star, Sparkles, Sun].map((Icon, iconIndex) => (
+                      <motion.div
+                        key={iconIndex}
+                        className="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white shadow-lg"
+                        whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                        transition={{ duration: 0.4 }}
+                        animate={{
+                          y: [0, -10, 0],
+                          rotate: [0, 5, -5, 0]
+                        }}
+                        style={{
+                          animationDelay: `${iconIndex * 0.2}s`,
+                          animationDuration: '3s',
+                          animationIterationCount: 'infinite'
+                        }}
+                      >
+                        <Icon size={20} />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Special Message for Users */}
+          <motion.div
+            className="text-center mt-32"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, type: "spring" }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-yellow-200/80 via-pink-200/80 to-purple-200/80 backdrop-blur-xl rounded-3xl p-16 shadow-2xl border-4 border-white/60 max-w-5xl mx-auto">
+              <motion.h3 
+                className="text-6xl font-black bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent mb-8"
+                animate={{
+                  backgroundPosition: ["0%", "100%", "0%"]
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              >
+                You Are Extraordinary
+              </motion.h3>
+              <p className="text-3xl text-gray-700 leading-relaxed mb-8">
+                Every person who joins CalmChase becomes part of something magical. Your journey, your growth, your peace - it all matters. You matter. 💝
+              </p>
+              <motion.div
+                className="flex justify-center space-x-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                {[Rainbow, Heart, Star, Sun, Sparkles].map((Icon, index) => (
+                  <motion.div
+                    key={index}
+                    className="w-16 h-16 bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 rounded-full flex items-center justify-center text-white shadow-xl"
+                    whileHover={{ scale: 1.2, rotate: 360, y: -10 }}
+                    animate={{
+                      y: [0, -15, 0],
+                      rotate: [0, 10, -10, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{
+                      duration: 3 + index * 0.3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Icon size={28} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Story Section */}
