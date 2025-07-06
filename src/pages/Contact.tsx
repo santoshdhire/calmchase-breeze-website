@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { Send, MapPin, Phone, Mail, Star, Heart, Sparkles, Zap, Globe, MessageCircle, Sun, Cloud, Flower, Rainbow } from 'lucide-react';
+import { Send, MapPin, Phone, Mail, Star, Heart, Sparkles, Zap, Globe, MessageCircle, Sun, Cloud, Flower, Rainbow, Coffee, Music, Camera } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Input } from '@/components/ui/input';
@@ -67,6 +67,13 @@ const Contact = () => {
     </motion.div>
   );
 
+  const testimonials = [
+    { name: "Sarah Johnson", text: "CalmChase transformed my life! 🌟", avatar: "👩‍💼" },
+    { name: "Mike Chen", text: "Best mindfulness journey ever! 🧘‍♂️", avatar: "👨‍💻" },
+    { name: "Emma Wilson", text: "Peace found at last! 🕊️", avatar: "👩‍🎨" },
+    { name: "David Brown", text: "Incredible experience! ✨", avatar: "👨‍🔬" }
+  ];
+
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 overflow-hidden">
       <Navigation />
@@ -104,6 +111,9 @@ const Contact = () => {
         <FloatingIcon icon={Sparkles} delay={2.5} x={620} y={480} color="text-indigo-400" />
         <FloatingIcon icon={Star} delay={3} x={80} y={500} color="text-yellow-500" />
         <FloatingIcon icon={Zap} delay={1.8} x={800} y={150} color="text-orange-500" />
+        <FloatingIcon icon={Coffee} delay={0.8} x={900} y={350} color="text-amber-500" />
+        <FloatingIcon icon={Music} delay={2.2} x={420} y={520} color="text-green-500" />
+        <FloatingIcon icon={Camera} delay={1.3} x={650} y={320} color="text-teal-500" />
       </motion.div>
 
       {/* Hero Section with Vibrant Design */}
@@ -322,7 +332,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Fun Interactive Map Section */}
+      {/* Creative Testimonials Section */}
       <section className="relative py-32 overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-pink-100/50 via-purple-100/50 to-cyan-100/50"
@@ -337,51 +347,64 @@ const Contact = () => {
             transition={{ duration: 1, type: "spring" }}
             viewport={{ once: true }}
           >
-            Find Us in This <br />
+            What People <br />
             <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
-              Beautiful World
+              Are Saying
             </span>
           </motion.h2>
 
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="bg-gradient-to-br from-white/90 to-purple-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border-2 border-white/60"
+                initial={{ opacity: 0, y: 50, rotate: -5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                whileHover={{ scale: 1.1, rotate: 2 }}
+                transition={{ 
+                  delay: index * 0.2, 
+                  duration: 0.8,
+                  type: "spring",
+                  bounce: 0.4
+                }}
+                viewport={{ once: true }}
+              >
+                <div className="text-6xl mb-4">{testimonial.avatar}</div>
+                <p className="text-gray-700 text-lg font-medium mb-4">{testimonial.text}</p>
+                <h4 className="text-gray-800 font-bold">{testimonial.name}</h4>
+                <div className="flex justify-center mt-3 space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Fun Stats Section */}
           <motion.div
-            className="bg-gradient-to-br from-white/90 to-purple-50/90 backdrop-blur-xl rounded-3xl p-16 shadow-2xl border-2 border-white/60 max-w-5xl mx-auto"
+            className="grid md:grid-cols-3 gap-8 mt-20"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
             viewport={{ once: true }}
           >
-            <div className="aspect-video bg-gradient-to-br from-pink-200 via-purple-200 to-cyan-200 rounded-3xl flex items-center justify-center relative overflow-hidden shadow-inner">
+            {[
+              { number: "10,000+", label: "Happy Souls", icon: "😊", color: "from-pink-400 to-rose-500" },
+              { number: "50+", label: "Countries Reached", icon: "🌍", color: "from-purple-400 to-indigo-500" },
+              { number: "24/7", label: "Support Available", icon: "💝", color: "from-cyan-400 to-blue-500" }
+            ].map((stat, index) => (
               <motion.div
-                className="text-gray-700 text-3xl font-bold text-center"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                key={index}
+                className={`bg-gradient-to-r ${stat.color} rounded-3xl p-8 text-white shadow-2xl`}
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.3 }}
               >
-                🗺️ <br />
-                Interactive Map <br />
-                Coming Soon! 
+                <div className="text-5xl mb-4">{stat.icon}</div>
+                <div className="text-4xl font-black mb-2">{stat.number}</div>
+                <div className="text-xl font-medium">{stat.label}</div>
               </motion.div>
-              
-              {/* Animated location markers */}
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full shadow-lg"
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${30 + (i % 2) * 40}%`
-                  }}
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.7, 1, 0.7]
-                  }}
-                  transition={{
-                    duration: 2 + i * 0.5,
-                    repeat: Infinity,
-                    delay: i * 0.3
-                  }}
-                />
-              ))}
-            </div>
+            ))}
           </motion.div>
         </div>
       </section>
