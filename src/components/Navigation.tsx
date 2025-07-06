@@ -63,7 +63,7 @@ const Navigation = () => {
               <Link to="/programs" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">Programs</Link>
               <Link to="/gallery" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">Gallery</Link>
               <Link to="/blog" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">Blog</Link>
-              <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">Contact</a>
+              <Link to="/contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">Contact</Link>
             </div>
           </div>
 
@@ -105,7 +105,7 @@ const Navigation = () => {
             <Link to="/programs" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Programs</Link>
             <Link to="/gallery" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Gallery</Link>
             <Link to="/blog" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Blog</Link>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
+            <Link to="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
             <button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full">
               Enroll Now
             </button>
