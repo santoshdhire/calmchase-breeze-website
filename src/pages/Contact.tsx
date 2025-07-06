@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { Send, MapPin, Phone, Mail, Star, Heart, Sparkles, Zap, Globe, MessageCircle } from 'lucide-react';
+import { Send, MapPin, Phone, Mail, Star, Heart, Sparkles, Zap, Globe, MessageCircle, Sun, Cloud, Flower, Rainbow } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Input } from '@/components/ui/input';
@@ -15,15 +15,15 @@ const Contact = () => {
     offset: ["start start", "end end"]
   });
 
-  // Parallax transforms
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
-  const floatingElements = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
+  // Creative parallax transforms for light mode
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const floatingElements = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
   
-  // Smooth spring animations
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y1 = useSpring(useTransform(scrollYProgress, [0, 0.5], [0, -200]), springConfig);
-  const y2 = useSpring(useTransform(scrollYProgress, [0, 0.5], [0, -100]), springConfig);
+  // Bouncy spring animations
+  const springConfig = { stiffness: 200, damping: 20, restDelta: 0.001 };
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 0.5], [0, -150]), springConfig);
+  const y2 = useSpring(useTransform(scrollYProgress, [0, 0.5], [0, -80]), springConfig);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -46,103 +46,112 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Add form submission logic here
   };
 
-  const FloatingIcon = ({ icon: Icon, delay = 0, x = 0, y = 0 }: { icon: any, delay?: number, x?: number, y?: number }) => (
+  const FloatingIcon = ({ icon: Icon, delay = 0, x = 0, y = 0, color = "text-pink-400" }: { icon: any, delay?: number, x?: number, y?: number, color?: string }) => (
     <motion.div
-      className="absolute text-blue-300/20 dark:text-blue-400/20"
+      className={`absolute ${color} opacity-60`}
       style={{ x, y }}
       animate={{
-        y: [0, -20, 0],
-        rotate: [0, 5, -5, 0],
-        scale: [1, 1.1, 1]
+        y: [0, -30, 0],
+        rotate: [0, 10, -10, 0],
+        scale: [1, 1.2, 1]
       }}
       transition={{
-        duration: 4 + delay,
+        duration: 3 + delay,
         repeat: Infinity,
         ease: "easeInOut"
       }}
     >
-      <Icon size={24 + Math.random() * 20} />
+      <Icon size={20 + Math.random() * 25} />
     </motion.div>
   );
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-slate-800 dark:to-gray-900 overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 overflow-hidden">
       <Navigation />
       
-      {/* Animated Cursor */}
+      {/* Playful Animated Cursor */}
       <motion.div
-        className="fixed w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 pointer-events-none z-50 mix-blend-difference"
+        className="fixed w-6 h-6 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 pointer-events-none z-50 mix-blend-multiply"
         style={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
+          x: mousePosition.x - 12,
+          y: mousePosition.y - 12,
         }}
         animate={{
-          scale: isHovering ? 2 : 1,
+          scale: isHovering ? 3 : 1,
+          opacity: isHovering ? 0.7 : 1
         }}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       />
 
-      {/* Parallax Background */}
+      {/* Creative Background Elements */}
       <motion.div
         className="fixed inset-0 z-0"
         style={{ y: backgroundY }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-purple-900/50 to-indigo-900/50" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]" />
+        {/* Gradient Orbs */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-pink-300/30 to-purple-300/30 rounded-full blur-3xl" />
+        <div className="absolute top-40 right-32 w-96 h-96 bg-gradient-to-r from-cyan-300/25 to-blue-300/25 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 left-1/3 w-80 h-80 bg-gradient-to-r from-yellow-300/20 to-orange-300/20 rounded-full blur-3xl" />
         
-        {/* Animated Floating Elements */}
-        <FloatingIcon icon={Star} delay={0} x={100} y={100} />
-        <FloatingIcon icon={Heart} delay={1} x={300} y={200} />
-        <FloatingIcon icon={Sparkles} delay={2} x={500} y={150} />
-        <FloatingIcon icon={Zap} delay={1.5} x={700} y={300} />
-        <FloatingIcon icon={Globe} delay={0.5} x={200} y={400} />
-        <FloatingIcon icon={MessageCircle} delay={2.5} x={600} y={500} />
+        {/* Floating Creative Icons */}
+        <FloatingIcon icon={Sun} delay={0} x={150} y={120} color="text-yellow-400" />
+        <FloatingIcon icon={Cloud} delay={1} x={320} y={180} color="text-blue-400" />
+        <FloatingIcon icon={Flower} delay={2} x={520} y={140} color="text-pink-500" />
+        <FloatingIcon icon={Rainbow} delay={1.5} x={720} y={280} color="text-purple-500" />
+        <FloatingIcon icon={Heart} delay={0.5} x={220} y={380} color="text-red-400" />
+        <FloatingIcon icon={Sparkles} delay={2.5} x={620} y={480} color="text-indigo-400" />
+        <FloatingIcon icon={Star} delay={3} x={80} y={500} color="text-yellow-500" />
+        <FloatingIcon icon={Zap} delay={1.8} x={800} y={150} color="text-orange-500" />
       </motion.div>
 
-      {/* Hero Section with Parallax */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section with Vibrant Design */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <motion.div
           className="text-center z-10 px-4"
           style={{ y: textY }}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, type: "spring", bounce: 0.3 }}
-            className="mb-8"
+            transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
+            className="mb-12"
           >
-            <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
-              Let's Connect
+            <h1 className="text-8xl md:text-9xl font-black bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent mb-8 leading-tight">
+              Say Hello!
             </h1>
             <motion.p 
-              className="text-2xl md:text-3xl text-white/80 max-w-4xl mx-auto leading-relaxed"
+              className="text-2xl md:text-4xl text-gray-700 max-w-5xl mx-auto leading-relaxed font-medium"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              transition={{ delay: 0.6, duration: 1 }}
             >
-              Ready to embark on an extraordinary journey? We're here to make magic happen together.
+              Let's create something <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent font-bold">amazing</span> together! 
+              <br />Your journey to peace starts with a simple message.
             </motion.p>
           </motion.div>
 
           <motion.div
-            className="flex justify-center space-x-8 mb-12"
+            className="flex justify-center space-x-6 mb-16"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
           >
-            {[Mail, Phone, MapPin].map((Icon, index) => (
+            {[
+              { icon: Mail, bg: "from-pink-400 to-rose-400" },
+              { icon: Phone, bg: "from-purple-400 to-indigo-400" },
+              { icon: MapPin, bg: "from-cyan-400 to-blue-400" }
+            ].map(({ icon: Icon, bg }, index) => (
               <motion.div
                 key={index}
-                className="bg-white/10 backdrop-blur-lg rounded-full p-6 border border-white/20"
-                whileHover={{ scale: 1.2, rotate: 360 }}
-                transition={{ duration: 0.3 }}
+                className={`bg-gradient-to-r ${bg} rounded-3xl p-8 shadow-xl border-4 border-white`}
+                whileHover={{ scale: 1.3, rotate: [0, -10, 10, 0], y: -20 }}
+                transition={{ duration: 0.4 }}
                 onHoverStart={() => setIsHovering(true)}
                 onHoverEnd={() => setIsHovering(false)}
               >
-                <Icon size={32} className="text-white" />
+                <Icon size={36} className="text-white" />
               </motion.div>
             ))}
           </motion.div>
@@ -150,122 +159,161 @@ const Contact = () => {
 
         {/* Floating Geometric Shapes */}
         <motion.div
-          className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-500/20 rounded-full blur-xl"
+          className="absolute top-32 left-16 w-40 h-40 bg-gradient-to-r from-pink-300/40 to-purple-300/40 rounded-full shadow-2xl"
           style={{ y: y1 }}
         />
         <motion.div
-          className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-r from-pink-400/20 to-blue-500/20 rounded-full blur-xl"
+          className="absolute bottom-48 right-24 w-56 h-56 bg-gradient-to-r from-cyan-300/40 to-blue-300/40 rounded-full shadow-2xl"
           style={{ y: y2 }}
         />
       </section>
 
-      {/* Interactive Contact Form Section */}
-      <section className="relative py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Creative Contact Form Section */}
+      <section className="relative py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-20 items-start">
             
-            {/* Contact Info with Parallax Cards */}
+            {/* Contact Info Cards */}
             <motion.div
               className="space-y-8"
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl font-bold text-white mb-12">
-                Get In <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Touch</span>
+              <h2 className="text-6xl font-black text-gray-800 mb-16">
+                Connect With <br />
+                <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
+                  Our Team
+                </span>
               </h2>
               
               {[
-                { icon: MapPin, title: "Visit Us", info: "123 Innovation Street, Tech City, TC 12345" },
-                { icon: Phone, title: "Call Us", info: "+1 (555) 123-CALM" },
-                { icon: Mail, title: "Email Us", info: "hello@calmchase.com" }
+                { 
+                  icon: MapPin, 
+                  title: "Visit Our Sanctuary", 
+                  info: "123 Mindfulness Avenue, Peaceful Gardens, PG 12345",
+                  bg: "from-pink-100 to-rose-100",
+                  iconBg: "from-pink-400 to-rose-500",
+                  border: "border-pink-200"
+                },
+                { 
+                  icon: Phone, 
+                  title: "Call for Guidance", 
+                  info: "+1 (555) 123-CALM",
+                  bg: "from-purple-100 to-indigo-100",
+                  iconBg: "from-purple-400 to-indigo-500",
+                  border: "border-purple-200"
+                },
+                { 
+                  icon: Mail, 
+                  title: "Send Love Letters", 
+                  info: "hello@calmchase.com",
+                  bg: "from-cyan-100 to-blue-100",
+                  iconBg: "from-cyan-400 to-blue-500",
+                  border: "border-cyan-200"
+                }
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className="group bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-blue-400/50 transition-all duration-300"
+                  className={`group bg-gradient-to-r ${item.bg} rounded-3xl p-8 shadow-xl border-2 ${item.border} hover:shadow-2xl transition-all duration-500`}
                   whileHover={{ scale: 1.05, y: -10 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.98 }}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  transition={{ delay: index * 0.2, duration: 0.8 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-center space-x-6">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                      <item.icon size={28} className="text-white" />
-                    </div>
+                  <div className="flex items-center space-x-8">
+                    <motion.div 
+                      className={`bg-gradient-to-r ${item.iconBg} p-6 rounded-2xl shadow-lg`}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <item.icon size={32} className="text-white" />
+                    </motion.div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                      <p className="text-gray-300">{item.info}</p>
+                      <h3 className="text-2xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                      <p className="text-gray-600 text-lg">{item.info}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Animated Contact Form */}
+            {/* Vibrant Contact Form */}
             <motion.div
-              className="bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10"
+              className="bg-gradient-to-br from-white/80 to-purple-50/80 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border-2 border-white/50"
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl font-bold text-white mb-8 text-center">Send us a Message</h3>
+              <div className="text-center mb-10">
+                <h3 className="text-4xl font-black bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
+                  Start Your Journey
+                </h3>
+                <p className="text-gray-600 text-lg">Every great story begins with hello!</p>
+              </div>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {[
-                  { key: 'name', placeholder: 'Your Name', type: 'text' },
-                  { key: 'email', placeholder: 'Your Email', type: 'email' },
-                  { key: 'subject', placeholder: 'Subject', type: 'text' }
+                  { key: 'name', placeholder: 'Your Beautiful Name', type: 'text', icon: '👋' },
+                  { key: 'email', placeholder: 'Your Email Address', type: 'email', icon: '✉️' },
+                  { key: 'subject', placeholder: 'What\'s on Your Mind?', type: 'text', icon: '💭' }
                 ].map((field, index) => (
                   <motion.div
                     key={field.key}
-                    initial={{ opacity: 0, y: 20 }}
+                    className="relative"
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    transition={{ delay: index * 0.1, duration: 0.6 }}
                     viewport={{ once: true }}
                   >
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl">
+                      {field.icon}
+                    </div>
                     <Input
                       type={field.type}
                       placeholder={field.placeholder}
                       value={formData[field.key as keyof typeof formData]}
                       onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 h-14 text-lg rounded-xl focus:border-blue-400 focus:ring-blue-400/20"
+                      className="pl-16 bg-white/70 border-2 border-purple-200 text-gray-700 placeholder:text-gray-500 h-16 text-lg rounded-2xl focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all duration-300"
                     />
                   </motion.div>
                 ))}
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  className="relative"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.4 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
                   viewport={{ once: true }}
                 >
+                  <div className="absolute left-4 top-6 text-2xl">💌</div>
                   <Textarea
-                    placeholder="Your Message"
+                    placeholder="Share your thoughts, dreams, or questions..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 min-h-32 text-lg rounded-xl focus:border-blue-400 focus:ring-blue-400/20"
+                    className="pl-16 bg-white/70 border-2 border-purple-200 text-gray-700 placeholder:text-gray-500 min-h-36 text-lg rounded-2xl focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all duration-300"
                     rows={6}
                   />
                 </motion.div>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.4 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
                   viewport={{ once: true }}
                 >
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 rounded-xl text-lg transition-all duration-300 transform hover:scale-105"
+                    className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 text-white font-bold py-6 rounded-2xl text-xl transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-2xl"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                   >
-                    <Send className="mr-2" size={20} />
-                    Send Message
+                    <Send className="mr-3" size={24} />
+                    Send My Message 🚀
                   </Button>
                 </motion.div>
               </form>
@@ -274,55 +322,65 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Interactive Map/Location Section with Parallax */}
+      {/* Fun Interactive Map Section */}
       <section className="relative py-32 overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20"
+          className="absolute inset-0 bg-gradient-to-r from-pink-100/50 via-purple-100/50 to-cyan-100/50"
           style={{ y: floatingElements }}
         />
         
         <div className="relative max-w-7xl mx-auto px-4 text-center">
           <motion.h2
-            className="text-6xl font-bold text-white mb-16"
+            className="text-7xl font-black text-gray-800 mb-20"
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, type: "spring" }}
+            transition={{ duration: 1, type: "spring" }}
             viewport={{ once: true }}
           >
-            Find Us in the <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Universe</span>
+            Find Us in This <br />
+            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
+              Beautiful World
+            </span>
           </motion.h2>
 
           <motion.div
-            className="bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 max-w-4xl mx-auto"
+            className="bg-gradient-to-br from-white/90 to-purple-50/90 backdrop-blur-xl rounded-3xl p-16 shadow-2xl border-2 border-white/60 max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.2 }}
             viewport={{ once: true }}
           >
-            <div className="aspect-video bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+            <div className="aspect-video bg-gradient-to-br from-pink-200 via-purple-200 to-cyan-200 rounded-3xl flex items-center justify-center relative overflow-hidden shadow-inner">
               <motion.div
-                className="text-white text-2xl font-semibold"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                className="text-gray-700 text-3xl font-bold text-center"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
               >
-                🗺️ Interactive Map Coming Soon
+                🗺️ <br />
+                Interactive Map <br />
+                Coming Soon! 
               </motion.div>
               
-              {/* Animated location pulse */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                animate={{
-                  scale: [1, 2, 1],
-                  opacity: [1, 0, 1]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <div className="w-4 h-4 bg-red-500 rounded-full" />
-              </motion.div>
+              {/* Animated location markers */}
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full shadow-lg"
+                  style={{
+                    left: `${20 + i * 15}%`,
+                    top: `${30 + (i % 2) * 40}%`
+                  }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.7, 1, 0.7]
+                  }}
+                  transition={{
+                    duration: 2 + i * 0.5,
+                    repeat: Infinity,
+                    delay: i * 0.3
+                  }}
+                />
+              ))}
             </div>
           </motion.div>
         </div>
